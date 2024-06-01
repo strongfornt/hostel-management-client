@@ -16,6 +16,15 @@ export default function MealsByCategory() {
         slidesToShow: 4,
         slidesToScroll: 4,
         responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 4,
+                  infinite: true,
+                  dots: true
+                }
+              },
           {
             breakpoint: 1024,
             settings: {
@@ -35,7 +44,7 @@ export default function MealsByCategory() {
             }
           },
           {
-            breakpoint: 600,
+            breakpoint: 640,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
