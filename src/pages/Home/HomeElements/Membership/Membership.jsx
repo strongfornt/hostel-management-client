@@ -34,58 +34,112 @@ export default function Membership() {
 			<div className="relative z-0 flex flex-col items-center p-8 border-[#3F72AF] border rounded-md">
 				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg bg-[#3F72AF]  dark:text-gray-50">Silver</span>
 				<p className="flex items-center justify-center mt-4 space-x-2 font-bold">
-					<span className={`text-lg line-through ${theme === "light" && 'dark:text-gray-700'}`}>&nbsp;3$&nbsp;</span>
-					<span className="pb-2 text-4xl">1$</span>
-					<span className="text-lg">/</span>
+					<span className={`text-lg line-through ${theme === "light" && 'dark:text-gray-700'}`}>&nbsp;31.99$&nbsp;</span>
+					<span className="pb-2 text-4xl">29.99$</span>
+					<span className="text-lg">/mo</span>
 				</p>
 				<ul className="flex-1 ">
 					<li className="flex items-center space-x-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
 						</svg>
-						<span>100 coins to unlock recipes</span>
+						<span>Basic meal plan</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Shared study rooms</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Access to community events</span>
 					</li>
 					
 				</ul>
-                <p>Perfect for casual cooks who want to explore new recipes</p>
+               
 				<button className="px-4 py-2 mt-4 font-semibold uppercase border rounded-lg md:mt-4 sm:py-3 sm:px-8 dark:border-[#3F72AF]">Choose Plan</button>
 			</div>
 			<div className={`relative flex flex-col items-center p-8 border-2 rounded-md dark:border-[#3F72AF] bg-[#F9F7F7]`}>
-				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF]  dark:text-gray-50">Premium</span>
+				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF]  dark:text-gray-50">Gold</span>
 				<p className="flex items-center justify-center mt-4 space-x-2 font-bold">
-                <span className={`text-lg line-through ${theme === "light" && 'dark:text-gray-700'}`}>&nbsp;12$&nbsp;</span>
-					<span className="pb-2 text-4xl">10$</span>
-					<span className="text-lg">/</span>
+                <span className={`text-lg line-through ${theme === "light" && 'dark:text-gray-700'}`}>&nbsp;51.99$&nbsp;</span>
+					<span className="pb-2 text-4xl">49.99$</span>
+					<span className="text-lg">/mo</span>
 				</p>
 				<ul className="flex-1 space-y-2">
 					<li className="flex items-center space-x-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
 						</svg>
-						<span>1000 coins to unlock recipes</span>
+						<span>Premium meal plan</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Private study rooms</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Laundry service</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Access to community events</span>
 					</li>
 					
 				</ul>
-                <p>For serious food enthusiasts who want it all.</p>
+               
 				<button className="px-8 py-3 mt-7  text-lg font-semibold uppercase rounded dark:bg-[#3F72AF] dark:text-gray-50">Choose Plan</button>
 			</div>
 			<div className={`relative z-0 flex flex-col items-center p-8 border rounded-md ${theme === "light" ? 'dark:bg-gray-100' :'border border-teal-400'}`}>
-				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF] dark:text-gray-50">Popular</span>
+				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF] dark:text-gray-50">Platinum</span>
 				<p className="flex items-center justify-center mt-4 space-x-2 font-bold">
-					<span className="text-lg line-through dark:text-gray-700">&nbsp;7$&nbsp;</span>
-					<span className="pb-2 text-4xl">5$</span>
-					<span className="text-lg">/</span>
+					<span className="text-lg line-through dark:text-gray-700">&nbsp;100.99$&nbsp;</span>
+					<span className="pb-2 text-4xl">99.99$</span>
+					<span className="text-lg">/mo</span>
 				</p>
 				<ul className="flex-1 space-y-2">
 					<li className="flex items-center space-x-2">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
 						</svg>
-						<span>500 coins to unlock recipes</span>
+						<span>Premium meal plan</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Private study rooms</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Laundry service</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>24/7 concierge service</span>
+					</li>
+                    <li className="flex items-center space-x-2">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-teal-600">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						<span>Exclusive access to events</span>
 					</li>
 				</ul>
-                <p> Ideal for passionate home chefs looking for more variety.</p>
-				<button className="px-8 py-3 mt-4 text-lg font-semibold uppercase border rounded-md dark:border-teal-600">Start Now</button>
+                
+				<button className="px-8 py-3 mt-4 text-lg font-semibold uppercase border rounded-md dark:border-[#3F72AF]">Choose Plan</button>
 			</div>
 		</div>
 	</div>
