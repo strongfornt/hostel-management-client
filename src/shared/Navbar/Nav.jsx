@@ -71,8 +71,8 @@ export default function Nav() {
         to="/"
         className={({ isActive }) =>
           isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
+            ? ` text-[#3F72AF] w-fit text-sm font-medium  `
+            : `text-sm w-fit  font-medium hover:text-[#3F72AF] duration-300 `
         }
       >
         <p className="">Home</p>
@@ -81,61 +81,41 @@ export default function Nav() {
 
       <NavLink
         onClick={() => setMenu(false)}
-        to="/allTouristSpot"
+        to="/meals"
         className={({ isActive }) =>
           isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
+            ? ` text-[#3F72AF] w-fit text-sm font-medium  `
+            : `text-sm w-fit  font-medium hover:text-[#3F72AF] duration-300 `
         }
       >
-        <p className="">AllTouristSpot</p>
+        <p className="">Meals</p>
       </NavLink>
       <NavLink
         onClick={() => setMenu(false)}
         to="/addTouristSpot"
         className={({ isActive }) =>
           isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
+            ? ` text-[#3F72AF] w-fit text-sm font-medium  `
+            : `text-sm w-fit  font-medium hover:text-[#3F72AF] duration-300 `
         }
       >
-        <p className="">AddTouristSpot</p>
+        <p className="">Upcoming-Meals</p>
       </NavLink>
-      <NavLink
-      onClick={() => setMenu(false)}
-        to="/myList"
-        className={({ isActive }) =>
-          isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
-        }
-      >
-        <p className="">MyList</p>
-      </NavLink>
+      
       {
         user &&<NavLink
         onClick={() => setMenu(false)}
-        to="/updateProfile"
+        to="/dashboard"
         className={({ isActive }) =>
           isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
+            ? ` text-[#3F72AF] w-fit text-sm font-medium  `
+            : `text-sm w-fit  font-medium hover:text-[#3F72AF] duration-300 `
         }
       >
-        <p className="">Update Profile</p>
+        <p className="">Dashboard</p>
       </NavLink>
       }
- <NavLink
-        onClick={() => setMenu(false)}
-        to="/contact"
-        className={({ isActive }) =>
-          isActive
-            ? ` text-[#fcb040] w-fit text-sm font-medium  `
-            : `text-sm w-fit  font-medium hover:text-[#fcb040] duration-300 `
-        }
-      >
-        <p className="">Contact</p> 
-        </NavLink>
+ 
     </>
   );
 
@@ -149,8 +129,8 @@ export default function Nav() {
         to="/"
         className={({ isActive }) =>
           isActive
-            ? ` text-[#fcb040] w-fit  text-sm font-medium  `
-            : `text-sm w-fit  font-medium  hover:text-[#fcb040] duration-300  `
+            ? ` text-[#3F72AF] w-fit  text-sm font-medium  `
+            : `text-sm w-fit  font-medium  hover:text-[#3F72AF] duration-300  `
         }
       >
         <p className="">Home</p>
@@ -162,73 +142,56 @@ export default function Nav() {
                       setMenu(false);
                       
                     }}
-                    to="/allTouristSpot"
+                    to="/meals"
                     className={({ isActive }) =>
                       isActive
-                        ? ` text-[#fcb040] w-fit text-sm font-medium  `
+                        ? ` text-[#3F72AF] w-fit text-sm font-medium  `
                         : `text-sm w-fit ${
                             location.pathname === "/" &&
                             scrollY < 199 &&
                             "text-white"
-                          }  font-medium hover:text-[#fcb040] duration-300 `
+                          }  font-medium hover:text-[#3F72AF] duration-300 `
                     }
                   >
-                    <p className="">AllTouristSpot</p>
+                    <p className="">Meals</p>
                   </NavLink>
                   <NavLink
                     onClick={() => {
                       setMenu(false);
                       
                     }}
-                    to="/addTouristSpot"
+                    to="/upcomingMeals"
                     className={({ isActive }) =>
                       isActive
-                        ? ` text-[#fcb040] w-fit text-sm font-medium  `
+                        ? ` text-[#3F72AF] w-fit text-sm font-medium  `
                         : `text-sm w-fit  ${
                             location.pathname === "/" &&
                             scrollY < 199 &&
                             "text-white"
-                          } font-medium hover:text-[#fcb040] duration-300 `
+                          } font-medium hover:text-[#3F72AF] duration-300 `
                     }
                   >
-                    <p className="">AddTouristSpot</p>
+                    <p className="">Upcoming-Meals</p>
                   </NavLink> 
                   <NavLink
                     onClick={() => {
                       setMenu(false);
                     
                     }}
-                    to="/myList"
+                    to="/login"
                     className={({ isActive }) =>
                       isActive
-                        ? ` text-[#fcb040] w-fit text-sm font-medium  `
+                        ? ` text-[#3F72AF] w-fit text-sm font-medium  `
                         : `text-sm w-fit ${
                             location.pathname === "/" &&
                             scrollY < 199 &&
                             "text-white"
-                          }  font-medium hover:text-[#fcb040] duration-300 `
+                          }  font-medium hover:text-[#3F72AF] duration-300 `
                     }
                   >
-                    <p className="">MyList</p>
+                    <p className="">Join-Us</p>
                   </NavLink> 
-                  <NavLink
-                    onClick={() => {
-                      setMenu(false);
-                     
-                    }}
-                    to="/contact"
-                    className={({ isActive }) =>
-                      isActive
-                        ? ` text-[#fcb040] w-fit text-sm font-medium  `
-                        : `text-sm w-fit ${
-                            location.pathname === "/" &&
-                            scrollY < 199 &&
-                            "text-white"
-                          }  font-medium hover:text-[#fcb040] duration-300 `
-                    }
-                  >
-                    <p className="">Contact</p>
-                  </NavLink>
+                  
                  
     </>
   );
@@ -253,8 +216,8 @@ export default function Nav() {
           }`}
         >
           <div className="navbar-start w-fit ">
-            <a className=" text-2xl font-bold  text-[#fcb040] ">
-              <span className="text-3xl font-bold">T</span>ip
+            <a className=" text-2xl font-bold  text-[#3F72AF] ">
+              <span className="text-3xl font-bold">D</span>ine
               <span
                 className={`font-bold ${
                   theme === "light"
@@ -266,7 +229,7 @@ export default function Nav() {
                     : "text-white"
                 }`}
               >
-                Trove
+                Ease
               </span>
             </a>
           </div>
@@ -559,12 +522,12 @@ export default function Nav() {
                     to="/updateProfile"
                     className={({ isActive }) =>
                       isActive
-                        ? ` text-[#fcb040] w-fit text-sm   `
+                        ? ` text-[#3F72AF] w-fit text-sm   `
                         : `text-sm w-fit ${
                             location.pathname === "/" &&
                             scrollY < 199 &&
                             "text-white"
-                          }   hover:text-[#fcb040] duration-300 `
+                          }   hover:text-[#3F72AF] duration-300 `
                     }
                   >
                     <p className="flex items-center gap-1"> <MdBrowserUpdated className="text-white" /> Update profile</p>

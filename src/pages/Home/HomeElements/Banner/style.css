@@ -1,0 +1,33 @@
+.slide {
+  /* height: 94vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.swiper-pagination-bullet {
+  background-color: #3F72AF !important;
+}
+/* .swiper-button-next::after,
+.swiper-button-prev::after {
+    background-color: red !important;
+} */
+
+.slide1 {
+  background-image: url("./../../../../assets/Banner/banner1.jpg");
+}
+.slide2 {
+  background-image: url("./../../../../assets/Banner/banner4.jpg");
+}
+.slide3 {
+  background-image: url("./../../../../assets/Banner/banner5.jpg");
+}
+/* .slide4 {
+    background-image: url('./../../assets/house/resorts8.jpg');
+}
+.slide5 {
+    background-image: url('./../../assets/house/hotels1.jpg');
+} */

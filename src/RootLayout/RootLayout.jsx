@@ -1,12 +1,18 @@
+import { Outlet } from "react-router-dom";
 import Nav from "../shared/Navbar/Nav";
 
 
 export default function RootLayout() {
   return (
     <>
-        <div className="h-[200vh]  bg-red-800">
+        <header className="">
             <Nav/>
-        </div>
+        </header>
+
+        <main>
+            <Outlet/>
+        </main>
+
     </>
   )
 }
