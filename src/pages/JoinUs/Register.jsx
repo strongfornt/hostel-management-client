@@ -1,17 +1,21 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-dupe-keys */
-import {   useState } from "react";
-import { Link } from "react-router-dom";
+import {   useEffect, useState } from "react";
+
 import { IoEyeOutline } from "react-icons/io5";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Fade } from "react-awesome-reveal";
 import useAuth from "../../hooks/useAuth";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { imageUpload } from "../../shared/util/imageUpload";
+
 
 export default function Register({setTabIndex}) {
-  const {createUser,updateUserProfile,theme,setUser} = useAuth()
+  const {createUser,updateUserProfile,theme,setUser,user} = useAuth()
   const [passToggle, setPassToggle] = useState(false);
+  const navigate = useNavigate()
 
   const {
     register,
@@ -32,27 +36,38 @@ export default function Register({setTabIndex}) {
     return true;
   };
 
-  const formSubmit = (data) => {
+  const formSubmit = async (data) => {
     const { name, photo, email, password } = data;
-    createUser(email, password)
-      .then((users) => {
-        const user = users.user;
-        toast.success("Account created! Welcome!");
-        //update profile
-        updateUserProfile(user, {
-          displayName: name,
-          photoURL: photo,
-        })
-          .then(() => {
-            setUser({ ...user, displayName: name, photoURL: photo });
-          })
-          .catch(() => {});
-      })
-      .catch(() => toast.error("User already exist!"));
+   const imageFile = photo[0];
+   
+     const image = await imageUpload(imageFile);
+     createUser(email, password)
+     .then((users) => {
+       const user = users.user;
+       toast.success("Account created! Welcome!");
+       //update profile
+        if(image){
+            updateUserProfile(user, {
+                displayName: name,
+                photoURL: image,
+              })
+                .then(() => {
+                  setUser({ ...user, displayName: name, photoURL: image });
+                })
+                .catch(() => {});
+        }
+     })
+     .catch(() => toast.error("User already exist!"));
 
     reset();
   };
   
+  useEffect(() => {
+    if (user) {
+        navigate('/')
+    }
+  }, [ navigate, user]);
+
   return (
     <>
       
@@ -126,7 +141,7 @@ export default function Register({setTabIndex}) {
                 </label>
                 <input
                   {...register("photo")}
-                  type="text"
+                  type="file"
                   name="photo"
                   id="photo"
                   placeholder="photo url"

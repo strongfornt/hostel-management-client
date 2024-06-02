@@ -1,11 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Nav from "../shared/Navbar/Nav";
 import Footer from "../shared/Footer/Footer";
 
 
 export default function RootLayout() {
   return (
-    <>
+    <div>
+         <ScrollRestoration />
         <header className="">
             <Nav/>
         </header>
@@ -18,6 +19,6 @@ export default function RootLayout() {
             <Footer/>
         </footer>
 
-    </>
+    </div>
   )
 }

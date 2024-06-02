@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
+
 import { FcGoogle } from "react-icons/fc";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Fade } from "react-awesome-reveal";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { toast } from "react-toastify";
 
-// eslint-disable-next-line react/prop-types
+import toast from "react-hot-toast";
+
+
+// eslint-disable-next-line react/prop-types 
 export default function Login({setTabIndex}) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,10 +31,10 @@ export default function Login({setTabIndex}) {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
-        toast("You're in! Welcome back!");
+        toast.success("You're in! Welcome back!");
       })
       .catch(() => {
-        toast("Sign-in error. Check connection.");
+        toast.error("Sign-in error. Check connection.");
       });
   };
 
@@ -49,7 +51,7 @@ export default function Login({setTabIndex}) {
 
   return (
     <>
-     
+    
       <section className="flex justify-between mt-5 mb-10">
         {/* login site start */}
         <div

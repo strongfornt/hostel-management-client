@@ -13,7 +13,8 @@ import { MdBrowserUpdated, MdLogout } from "react-icons/md";
 
 
 import useAuth from "../../hooks/useAuth";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 export default function Nav() {
   const [scrollY, setScrollY] = useState(0);
