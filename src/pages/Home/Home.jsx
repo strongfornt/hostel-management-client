@@ -3,6 +3,8 @@ import Banner from "./HomeElements/Banner/Banner";
 import MealsByCategory from "./HomeElements/MealsByCategory/MealsByCategory";
 import Membership from "./HomeElements/Membership/Membership";
 import Review from "./HomeElements/Reviews/Review";
+import Partnership from "./HomeElements/Partnership/Partnership";
+import Subscribe from "./HomeElements/Subscribe/Subscribe";
 
 
 export default function Home() {
@@ -23,11 +25,20 @@ export default function Home() {
             <Membership/>
         </div>
 
+      
+
           {/* review section  ============================== */}
           <div className="my-32 overflow-hidden" >
             <Review/>
         </div>
         {/* review section  ============================== */}
+
+        <div className="mb-16 mt-44" >
+            <Partnership/>
+        </div>
+        <div className="mt-10  ">
+            <Subscribe/>
+        </div>
     </>
   )
 }

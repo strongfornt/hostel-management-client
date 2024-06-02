@@ -20,6 +20,7 @@ export default function Slider() {
       <Swiper
         effect="coverflow"
         grabCursor={true}
+        loop={true}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
@@ -51,7 +52,7 @@ export default function Slider() {
             className="swiper-slide flex justify-center items-center"
           >
             <div className="   md:h-80 md:w-80 lg:h-96 xl:w-96 flex flex-col  bg-[#F9F7F7] rounded-lg shadow-lg">
-              <div className="flex flex-col items-center justify-center gap-2 h-1/2">
+              <div className="flex py-2 flex-col items-center justify-center gap-2 h-1/2">
                 <BsChatQuote className=" text-2xl md:text-5xl text-[#3F72AF]" />
                 <p className=" text-xs  md:text-sm   text-[#4b5664] text-center">
                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad facilis error consequatur adipisci qui earum illum dolorum ab doloremque ratione?

@@ -18,11 +18,11 @@ export default function Review() {
     <div className="flex gap-10 flex-col px-2 md:px-4" >
         <div className=" text-center">
         <Fade direction="up" triggerOnce={true}>
-        <p className="mt-2 font-medium text-2xl leading-6 text-gray-600">
+        <p className="mt-2 font-mono text-2xl leading-6 text-gray-600">
             Get To Know Us
           </p>
         <h2 className="text-3xl font-extrabold text-[#4b5664] sm:text-5xl">
-            What Our Residents<span className="text-[#3F72AF]"> Say</span>
+            What Our Residents<span className="text-[#3F72AF]"> Say!</span>
           </h2>
         
           <p className="mt-4 max-w-2xl text-lg text-gray-500 lg:mx-auto">
