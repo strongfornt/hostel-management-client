@@ -2,6 +2,7 @@ import { Fade } from "react-awesome-reveal";
 import Banner from "./HomeElements/Banner/Banner";
 import MealsByCategory from "./HomeElements/MealsByCategory/MealsByCategory";
 import Membership from "./HomeElements/Membership/Membership";
+import Review from "./HomeElements/Reviews/Review";
 
 
 export default function Home() {
@@ -21,6 +22,12 @@ export default function Home() {
         <div>
             <Membership/>
         </div>
+
+          {/* review section  ============================== */}
+          <div className="my-32 overflow-hidden" >
+            <Review/>
+        </div>
+        {/* review section  ============================== */}
     </>
   )
 }

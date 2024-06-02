@@ -1,0 +1,13 @@
+/* styles.css */
+.swiper-button-custom {
+    background-color: #1f2937; /* Customize button color */
+    color: white; /* Customize text color */
+    padding: 8px 16px; /* Customize padding */
+    border-radius: 50%; /* Round buttons */
+    transition: background-color 0.3s ease; /* Transition effect */
+  }
+  
+  .swiper-button-custom:hover {
+    background-color: #374151; /* Hover effect */
+  }
+  
