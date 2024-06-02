@@ -178,7 +178,7 @@ export default function Nav() {
                       setMenu(false);
                     
                     }}
-                    to="/login"
+                    to="/joinUs"
                     className={({ isActive }) =>
                       isActive
                         ? ` text-[#3F72AF] w-fit text-sm font-medium  `

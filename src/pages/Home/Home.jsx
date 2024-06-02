@@ -5,11 +5,15 @@ import Membership from "./HomeElements/Membership/Membership";
 import Review from "./HomeElements/Reviews/Review";
 import Partnership from "./HomeElements/Partnership/Partnership";
 import Subscribe from "./HomeElements/Subscribe/Subscribe";
+import { Helmet } from "react-helmet-async/lib";
 
 
 export default function Home() {
   return (
     <>
+       <Helmet>
+        <title>DineEase | Home</title>
+      </Helmet>
         <div>
             <Banner/> 
         </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "./../../assets/Profile/deFaultProfile1.png";
+import logo from "./../../assets/Profile/logo.png";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -48,7 +48,7 @@ export default function Footer() {
             </div>
 
             <p className="text-sm text-[#d4cccc] mt-2 max-w-screen-md text-center lg:text-start ">
-            Your online hub for collaborative learning and project management excellence.
+            Enhancing your hostel experience with seamless meal management and real-time community feedback.
             </p>
           </Fade>
           </div>
@@ -173,7 +173,7 @@ export default function Footer() {
                 >
                     <IoMdMail className="text-[#3F72AF]" />
                   <a rel="noopener noreferrer" className="ml-2" href="#">
-                    contact@taskbud.com
+                    contact@dine.com
                   </a>
                 </li>
                </Fade>
