@@ -11,6 +11,7 @@ import {
   } from "firebase/auth";
   import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
   
   
   
@@ -18,6 +19,7 @@ import auth from "../Firebase/firebase.config";
   export const AuthContext = createContext(null);
   
   export default function ContextProvider({ children }) {
+    const axiosPublic = useAxiosPublic();
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
   
@@ -52,12 +54,28 @@ import auth from "../Firebase/firebase.config";
     useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
         if (currentUser) {
-          
-          
-          setTimeout(()=>{
             setUser(currentUser);
-              setLoading(false)
-          },1000)
+            setLoading(false);
+            //action for sending user information to database start =============================
+            const {displayName, email, photoURL} = currentUser || user;
+            const userInfo = {
+                name:displayName,
+                email,
+                photo:photoURL,
+                badge:"Bronze"
+            }
+            
+            const sendUserData = async () => {
+                const res = await axiosPublic.post('/users',userInfo)
+                console.log(res);
+            }
+            sendUserData();
+            //action for sending user information to database start =============================
+
+           
+            
+          
+          
         
         } else {
           setUser(null);

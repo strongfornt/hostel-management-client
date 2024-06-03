@@ -137,7 +137,7 @@ export default function Register({setTabIndex}) {
                 data-aos-duration="1000"
               >
                 <label htmlFor="email" className="block mb-2 text-sm">
-                  Photo Url
+                  Photo
                 </label>
                 <input
                   {...register("photo")}
