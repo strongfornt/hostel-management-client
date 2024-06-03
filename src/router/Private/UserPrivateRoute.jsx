@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 
 import { useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import Spinner from "../../shared/Spinner/Spinner";
 
 
 
@@ -17,7 +18,7 @@ export default function UserPrivateRoute({ children }) {
   const { user, loading } = useAuth()
 
   if (loading) {
-    return <h1>hello loading</h1>;
+    return <Spinner/>;
   }
 
   if (user) return children;

@@ -1,9 +1,11 @@
-import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 import Nav from "../shared/Navbar/Nav";
 import Footer from "../shared/Footer/Footer";
+import Spinner from "../shared/Spinner/Spinner";
 
 
 export default function RootLayout() {
+    const navigation = useNavigation()
   return (
     <div>
          <ScrollRestoration />
@@ -12,7 +14,9 @@ export default function RootLayout() {
         </header>
 
         <main>
-            <Outlet/>
+        {
+            navigation.state ==="loading" ? <Spinner/> : <Outlet/>
+        }
         </main>
 
         <footer>

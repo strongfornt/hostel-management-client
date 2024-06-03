@@ -5,11 +5,13 @@ import JoinUs from "../pages/JoinUs/JoinUs";
 import Payment from "../pages/Home/HomeElements/Membership/Payment/Payment";
 import axios from "axios";
 import UserPrivateRoute from "./Private/UserPrivateRoute";
+import Error from "../shared/Error/Error";
 
 export const router = createBrowserRouter([
     {
       path: "/",
       element:<RootLayout/>,
+      errorElement:<Error/>,
       children:[
         {
             path:'/',

@@ -6,6 +6,7 @@ import useAuth from "../../../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import './../../../../styles/common.css';
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../../../hooks/useAxiosPublic";
 
 export default function CheckoutForm({totalPrice}) {
   const { user } = useAuth();
@@ -15,6 +16,7 @@ export default function CheckoutForm({totalPrice}) {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic()
 
   useEffect(() => {
     axiosSecure
@@ -94,7 +96,9 @@ export default function CheckoutForm({totalPrice}) {
         date: new Date().toLocaleDateString('en-US', options),
 
       }
-
+      const savePayment = async() => {
+            const {data} = await axiosPublic.post('/')
+      }
       navigate('/')
     //now save the payment in the database end ============================
 
