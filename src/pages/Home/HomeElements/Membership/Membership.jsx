@@ -102,8 +102,8 @@ export default function Membership() {
 			<div className={`relative z-0 flex flex-col items-center p-8 border rounded-md ${theme === "light" ? 'dark:bg-gray-100' :'border border-teal-400'}`}>
 				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF] dark:text-gray-50">Platinum</span>
 				<p className="flex items-center justify-center mt-4 space-x-2 font-bold">
-					<span className="text-lg line-through dark:text-gray-700">&nbsp;100.99$&nbsp;</span>
-					<span className="pb-2 text-4xl">99.99$</span>
+					<span className="text-lg line-through dark:text-gray-700">&nbsp;81.99$&nbsp;</span>
+					<span className="pb-2 text-4xl">79.99$</span>
 					<span className="text-lg">/mo</span>
 				</p>
 				<ul className="flex-1 space-y-2">

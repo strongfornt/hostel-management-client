@@ -66,8 +66,8 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
             }
             
             const sendUserData = async () => {
-                const res = await axiosPublic.post('/users',userInfo)
-                console.log(res);
+                 await axiosPublic.post('/users',userInfo)
+            
             }
             sendUserData();
             //action for sending user information to database start =============================
@@ -86,7 +86,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
       return () => {
         unSubscribe();
       };
-    }, []);
+    }, [axiosPublic,user]);
   
     const authInfo = {
       user,
