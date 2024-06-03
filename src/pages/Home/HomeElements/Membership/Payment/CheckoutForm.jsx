@@ -1,17 +1,20 @@
+/* eslint-disable react/prop-types */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import './../../../../styles/common.css';
+import { useNavigate } from "react-router-dom";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({totalPrice}) {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const totalPrice = 29.99;
 
   useEffect(() => {
     axiosSecure
@@ -20,7 +23,7 @@ export default function CheckoutForm() {
         console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
-  }, [axiosSecure]);
+  }, [axiosSecure,totalPrice]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -91,6 +94,8 @@ export default function CheckoutForm() {
         date: new Date().toLocaleDateString('en-US', options),
 
       }
+
+      navigate('/')
     //now save the payment in the database end ============================
 
       }
@@ -117,14 +122,22 @@ export default function CheckoutForm() {
             },
           }}
         />
-        <button
-          className="btn btn-success"
+        {/* <button
+          className=""
           type="submit"
           disabled={!stripe || !clientSecret}
         >
           Pay
-        </button>
+        </button> */}
+       <div className="w-fit mx-auto">
+       <button
+            type="submit"
+            disabled={!stripe || !clientSecret}
+         className="px-8 py-2 tracking-wide cursor-pointer text-white capitalize transition-colors duration-300 transform bg-[#3F72AF] rounded-md hover:bg-[#4b83c8] focus:outline-none  focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+         Make Payment
+              </button>
         <p className="text-red-800">{error}</p>
+       </div>
       </form>
     </>
   );

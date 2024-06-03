@@ -3,6 +3,8 @@ import RootLayout from "../RootLayout/RootLayout"
 import Home from "../pages/Home/Home";
 import JoinUs from "../pages/JoinUs/JoinUs";
 import Payment from "../pages/Home/HomeElements/Membership/Payment/Payment";
+import axios from "axios";
+import UserPrivateRoute from "./Private/UserPrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -18,8 +20,9 @@ export const router = createBrowserRouter([
             element:<JoinUs/>
         },
         {
-            path:'/payment',
-            element:<Payment/>
+            path:'/payment/:name',
+            element:<UserPrivateRoute><Payment/></UserPrivateRoute>,
+            loader:({params}) => axios.get(`http://localhost:5000/membership/${params.name}`)
         }
       ]
     },

@@ -3,6 +3,7 @@
 
 import { Fade } from "react-awesome-reveal";
 import useAuth from "../../../../hooks/useAuth";
+import { Link } from "react-router-dom";
 
 export default function Membership() {
     const {theme} = useAuth()
@@ -60,7 +61,7 @@ export default function Membership() {
 					
 				</ul>
                
-				<button className="px-4 py-2 mt-4 font-semibold uppercase border rounded-lg md:mt-4 sm:py-3 sm:px-8 dark:border-[#3F72AF]">Choose Plan</button>
+				<Link to={`/payment/Silver`} className="px-4 py-2 mt-4 font-semibold uppercase border rounded-lg md:mt-4 sm:py-3 sm:px-8 dark:border-[#3F72AF]">Choose Plan</Link>
 			</div>
 			<div className={`relative flex flex-col items-center p-8 border-2 rounded-md dark:border-[#3F72AF] bg-[#F9F7F7]`}>
 				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF]  dark:text-gray-50">Gold</span>
@@ -97,7 +98,7 @@ export default function Membership() {
 					
 				</ul>
                
-				<button className="px-8 py-3 mt-7  text-lg font-semibold uppercase rounded dark:bg-[#3F72AF] dark:text-gray-50">Choose Plan</button>
+				<Link to={`/payment/Gold`} className="px-8 py-3 mt-7  text-lg font-semibold uppercase rounded dark:bg-[#3F72AF] dark:text-gray-50">Choose Plan</Link>
 			</div>
 			<div className={`relative z-0 flex flex-col items-center p-8 border rounded-md ${theme === "light" ? 'dark:bg-gray-100' :'border border-teal-400'}`}>
 				<span className="absolute top-0 px-6 pt-1 pb-2 font-medium rounded-b-lg dark:bg-[#3F72AF] dark:text-gray-50">Platinum</span>
@@ -139,7 +140,7 @@ export default function Membership() {
 					</li>
 				</ul>
                 
-				<button className="px-8 py-3 mt-4 text-lg font-semibold uppercase border rounded-md dark:border-[#3F72AF]">Choose Plan</button>
+				<Link to={`/payment/Platinum`} className="px-8 py-3 mt-4 text-lg font-semibold uppercase border rounded-md dark:border-[#3F72AF]">Choose Plan</Link>
 			</div>
 		</div>
 	</div>
