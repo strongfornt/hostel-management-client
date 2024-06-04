@@ -18,7 +18,7 @@ export default function DashboardLayout() {
             <Dashboard/>
         </header>
 
-        <main className=" flex-1 px-2 md:px-0 lg:ml-64 xl:ml-20  " >
+        <main className=" flex-1 px-2 md:px-4 lg:ml-64 xl:ml-20  " >
 
            
         <Outlet/>

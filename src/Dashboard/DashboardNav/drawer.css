@@ -1,10 +1,10 @@
 /* Custom styles for react-modern-drawer */
-.custom-drawer {
-    background-color: #DBE2EF; /* Change background color */
-    box-shadow: none; /* Remove box shadow */
-    padding: 0; /* Remove padding */
-  }
+
   /* Override specific default styles if necessary */
-.custom-drawer .react-modern-drawer__overlay {
-    background-color: rgba(0, 0, 0, 0.5); /* Change overlay color */
+/* .custom-drawer .react-modern-drawer__overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+  } */
+  .EZDrawer .EZDrawer__container {
+    background-color: transparent;
+    box-shadow: none;
   }

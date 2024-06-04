@@ -9,17 +9,17 @@ import { Link } from "react-router-dom";
 import { MdOutlineRateReview, MdOutlineReviews, MdOutlineUpcoming, MdPayment } from "react-icons/md";
 import { SiReactrouter } from "react-icons/si";
 import { IoIosGitPullRequest } from "react-icons/io";
-import { RiCloseCircleLine } from "react-icons/ri";
+
 // eslint-disable-next-line react/prop-types
 export default function ResponsiveDashboard({setIsOpen}) {
     const {user} = useAuth()
   return (
     <>
         <div className="max-h-screen p-3 space-y-2 w-60 dark:bg-[#DBE2EF] overflow-y-auto dark:text-gray-800 ">
-            <div className=" absolute  top-0 left-0  md:hidden" >
+            {/* <div className=" absolute  top-0 left-0  md:hidden" >
           
             <RiCloseCircleLine onClick={()=>setIsOpen(false)} className="w-6 h-6 cursor-pointer text-[#4b5664] " />
-            </div>
+            </div> */}
 	<div className="flex items-center p-2 space-x-4">
 		<img src={user?.photoURL} alt="" className="w-12 h-12 rounded-full dark:bg-gray-500" />
 		<div>

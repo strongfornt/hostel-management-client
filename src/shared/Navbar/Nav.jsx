@@ -49,7 +49,7 @@ export default function Nav() {
 
       document.body.style.paddingRight = `${scrollbarWidth}px`;
 
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = "hidden"; 
     } else {
       document.body.style.paddingRight = "0";
 
