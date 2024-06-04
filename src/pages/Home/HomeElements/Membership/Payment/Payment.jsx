@@ -13,6 +13,7 @@ export default function Payment() {
   const { theme } = useAuth();
   const { data } = useLoaderData();
   const {
+    name: badgeName,
     price: totalPrice,
     discount,
     description,
@@ -20,7 +21,6 @@ export default function Payment() {
     label,
     benefits,
   } = data || {};
-  console.log(data);
   return (
     <>
       <Helmet>
@@ -135,7 +135,7 @@ export default function Payment() {
 
             <div className="max-w-sm mt-5 mx-auto">
               <Elements stripe={stripePromise}>
-                <CheckoutForm totalPrice={totalPrice} />
+                <CheckoutForm totalPrice={totalPrice} badgeName={badgeName} />
               </Elements>
             </div>
           </div>

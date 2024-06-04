@@ -12,6 +12,7 @@ import {
   import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+// import useAxiosSecure from "../hooks/useAxiosSecure";
   
   
   
@@ -20,6 +21,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
   
   export default function ContextProvider({ children }) {
     const axiosPublic = useAxiosPublic();
+    // const axiosSecure = useAxiosSecure();
     const githubProvider = new GithubAuthProvider();
     const googleProvider = new GoogleAuthProvider();
   
@@ -53,6 +55,8 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
   
     useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const userEmail = currentUser?.email || user?.email;
+        const loggedUser = {email: userEmail}
         if (currentUser) {
             setUser(currentUser);
             setLoading(false);
@@ -72,12 +76,18 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
             sendUserData();
             //action for sending user information to database start =============================
 
-           
+              //if user exist then issue a token ===============================
+          axiosPublic.post("/jwt", loggedUser).then((res) => {
+            if (res.data.token) {
+              localStorage.setItem("access-token", res.data.token);
+            }
+          });
             
           
           
         
         } else {
+            localStorage.removeItem("access-token");
           setUser(null);
           setLoading(false)
         }

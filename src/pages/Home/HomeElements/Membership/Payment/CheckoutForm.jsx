@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 import useAuth from "../../../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import './../../../../styles/common.css';
+import "./../../../../styles/common.css";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../../../hooks/useAxiosPublic";
 
-export default function CheckoutForm({totalPrice}) {
+export default function CheckoutForm({ totalPrice, badgeName }) {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -16,16 +16,16 @@ export default function CheckoutForm({totalPrice}) {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
 
   useEffect(() => {
     axiosSecure
       .post("/create-payment-intent", { price: totalPrice })
       .then((res) => {
-        console.log(res.data.clientSecret);
+        // console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
-  }, [axiosSecure,totalPrice]);
+  }, [axiosSecure, totalPrice]);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -42,16 +42,16 @@ export default function CheckoutForm({totalPrice}) {
     }
 
     // Use your card Element with other Stripe.js APIs
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
 
     if (error) {
-      console.log("[error]", error);
+      //   console.log("[error]", error);
       setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+      //   console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
@@ -75,33 +75,44 @@ export default function CheckoutForm({totalPrice}) {
         icon: "error",
       });
     } else {
-      console.log("payment intent", paymentIntent);
+        // console.log("payment intent", paymentIntent.id);
       if (paymentIntent.status === "succeeded") {
-    //    swall message start======================x
-    Swal.fire({
-        title: "Payment Successful!",
-        text: "Thank you for your purchase! ",
-        icon: "success",
-      });
-    //    swall message start======================x
-      
-    //now save the payment in the database ============================
-    // Define options for the date format
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        //    swall message start======================x
+        Swal.fire({
+          title: "Payment Successful!",
+          text: "Thank you for your purchase! ",
+          icon: "success",
+        });
+        //    swall message start======================x
 
-      const payment = {
-        name: user?.displayName,
-        email: user?.email,
-        price: totalPrice,
-        date: new Date().toLocaleDateString('en-US', options),
+        //now save the payment in the database ============================
+        // Define options for the date format
+        const options = { year: "numeric", month: "long", day: "numeric" };
 
-      }
-      const savePayment = async() => {
-            const {data} = await axiosPublic.post('/')
-      }
-      navigate('/')
-    //now save the payment in the database end ============================
+        const payment = {
+          name: user?.displayName,
+          email: user?.email,
+          price: totalPrice,
+          date: new Date().toLocaleDateString("en-US", options),
+          transactionId: paymentIntent.id
 
+        };
+        const savePayment = async () => {
+          await axiosPublic.post("/payment", payment);
+        };
+        savePayment();
+        //now save the payment in the database end ============================
+        //now update the users badge ============================================
+        const userInfo = {
+          email: user?.email,
+          badge: badgeName,
+        };
+        const updateUserBadge = async () => {
+          await axiosPublic.put("/users", userInfo);
+        };
+        updateUserBadge();
+        //now update the users badge end ============================================
+        navigate("/");
       }
     }
 
@@ -133,15 +144,16 @@ export default function CheckoutForm({totalPrice}) {
         >
           Pay
         </button> */}
-       <div className="w-fit mx-auto">
-       <button
+        <div className="w-fit mx-auto">
+          <button
             type="submit"
             disabled={!stripe || !clientSecret}
-         className="px-8 py-2 tracking-wide cursor-pointer text-white capitalize transition-colors duration-300 transform bg-[#3F72AF] rounded-md hover:bg-[#4b83c8] focus:outline-none  focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-         Make Payment
-              </button>
-        <p className="text-red-800">{error}</p>
-       </div>
+            className="px-8 py-2 tracking-wide cursor-pointer text-white capitalize transition-colors duration-300 transform bg-[#3F72AF] rounded-md hover:bg-[#4b83c8] focus:outline-none  focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+          >
+            Make Payment
+          </button>
+          <p className="text-red-800">{error}</p>
+        </div>
       </form>
     </>
   );

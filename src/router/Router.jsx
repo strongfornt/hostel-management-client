@@ -7,6 +7,10 @@ import axios from "axios";
 import UserPrivateRoute from "./Private/UserPrivateRoute";
 import Error from "../shared/Error/Error";
 
+import AdminProfile from "../Dashboard/AdminDashboard/AdminProfile/AdminProfile";
+import ManageUsers from "../Dashboard/AdminDashboard/ManageUser/ManageUsers";
+import DashboardLayout from "../RootLayout/DashboardLayout";
+
 export const router = createBrowserRouter([
     {
       path: "/",
@@ -28,4 +32,21 @@ export const router = createBrowserRouter([
         }
       ]
     },
+    //dashboard start here====
+    {
+        path:'/dashboard',
+        element:<DashboardLayout/>,
+        children:[
+           //admin dashboard start ================================================4
+           {
+            index:true,
+            element:<AdminProfile/>
+           },
+           {
+            path:'manageUsers',
+            element:<ManageUsers/>
+           }
+           //admin dashboard end ================================================
+        ]
+    }
   ]);
