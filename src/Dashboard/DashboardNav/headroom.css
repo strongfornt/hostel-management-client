@@ -1,0 +1,13 @@
+/* headroom.css */
+.headroom {
+    transition: all .5s ease-in-out;
+  }
+  
+  .headroom--pinned {
+    transition: all .5s ease-in-out;
+  }
+  
+  .headroom--unpinned {
+    transition: all .5s ease-in-out;
+  }
+  

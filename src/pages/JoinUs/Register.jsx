@@ -10,12 +10,15 @@ import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { imageUpload } from "../../shared/util/imageUpload";
+import auth from "../../Firebase/firebase.config";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 export default function Register({setTabIndex}) {
   const {createUser,updateUserProfile,theme,setUser,user} = useAuth()
   const [passToggle, setPassToggle] = useState(false);
   const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic()
 
   const {
     register,
@@ -39,7 +42,7 @@ export default function Register({setTabIndex}) {
   const formSubmit = async (data) => {
     const { name, photo, email, password } = data;
    const imageFile = photo[0];
-   
+    
      const image = await imageUpload(imageFile);
      createUser(email, password)
      .then((users) => {
@@ -47,12 +50,26 @@ export default function Register({setTabIndex}) {
        toast.success("Account created! Welcome!");
        //update profile
         if(image){
-            updateUserProfile(user, {
+            updateUserProfile(auth.currentUser, {
                 displayName: name,
                 photoURL: image,
               })
                 .then(() => {
                   setUser({ ...user, displayName: name, photoURL: image });
+                  //send user info to the db start ==========================
+                  const userInfo = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    role:'User',
+                    photo:user?.photoURL,
+                    badge:"Bronze"
+                }
+                // console.log(userInfo);
+                 axiosPublic.post('/users',userInfo)
+                   .then(()=>{
+                    // console.log('from auth',res);
+                   });
+                  //send user info to the db end ==========================
                 })
                 .catch(() => {});
         }
@@ -144,6 +161,7 @@ export default function Register({setTabIndex}) {
                   type="file"
                   name="photo"
                   id="photo"
+                  required
                   placeholder="photo url"
                   className="w-full px-3 py-2 border rounded-md border-gray-300  bg-transparent  outline-none focus:ring-1 focus:ring-[#3F72AF] "
                 />

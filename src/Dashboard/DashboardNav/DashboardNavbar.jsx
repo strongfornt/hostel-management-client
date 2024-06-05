@@ -5,6 +5,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 //import styles 👇
 import 'react-modern-drawer/dist/index.css'
 import './drawer.css'
+import './headroom.css'
 
 import ResponsiveDashboard from '../DasboardBar/ResponsiveDashboard';
 import Headroom from 'react-headroom';
@@ -32,7 +33,7 @@ export default function DashboardNavbar() {
   return (
     <>
     <Headroom 
-       
+       className='headroom'
     >
     <div className='flex bg-white justify-between px-2 w-full py-4 '>
             <h1 className='text-2xl font-bold  text-[#3F72AF] '>Dine<span className='text-[#4b5664]'>Ease</span></h1>

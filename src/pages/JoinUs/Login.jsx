@@ -7,10 +7,12 @@ import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 // eslint-disable-next-line react/prop-types 
 export default function Login({setTabIndex}) {
+  const axiosPublic = useAxiosPublic();
   const location = useLocation();
   const navigate = useNavigate();
   const { signInUser, googleLogin, user, theme } = useAuth();
@@ -30,8 +32,23 @@ export default function Login({setTabIndex}) {
 
   const handleGoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then((result) => {
         toast.success("You're in! Welcome back!");
+        const socialUser = result.user;
+           //send user info to the db start ==========================
+           const userInfo = {
+            name: socialUser?.displayName,
+            email: socialUser?.email,
+            role:'User',
+            photo: socialUser?.photoURL,
+            badge:"Bronze"
+        }
+       
+         axiosPublic.post('/users',userInfo)
+           .then(()=>{
+       
+           });
+          //send user info to the db end ==========================
       })
       .catch(() => {
         toast.error("Sign-in error. Check connection.");

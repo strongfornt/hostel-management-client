@@ -55,28 +55,14 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
   
     useEffect(() => {
       const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-        const userEmail = currentUser?.email || user?.email;
-        const loggedUser = {email: userEmail}
+        
         if (currentUser) {
             setUser(currentUser);
             setLoading(false);
-            //action for sending user information to database start =============================
-            const {displayName, email, photoURL} = currentUser || user;
-            const userInfo = {
-                name:displayName,
-                email,
-                photo:photoURL,
-                badge:"Bronze"
-            }
-            
-            const sendUserData = async () => {
-                 await axiosPublic.post('/users',userInfo)
-            
-            }
-            sendUserData();
-            //action for sending user information to database start =============================
 
-              //if user exist then issue a token ===============================
+              // if user exist then issue a token ===============================
+              const userEmail = currentUser?.email || user?.email;
+        const loggedUser = {email: userEmail}
           axiosPublic.post("/jwt", loggedUser).then((res) => {
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
@@ -84,8 +70,6 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
           });
             
           
-          
-        
         } else {
             localStorage.removeItem("access-token");
           setUser(null);
@@ -96,7 +80,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
       return () => {
         unSubscribe();
       };
-    }, [axiosPublic,user]);
+    }, [axiosPublic,user?.email]);
   
     const authInfo = {
       user,
