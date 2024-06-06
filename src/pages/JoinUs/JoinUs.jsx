@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async/lib";
+
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -6,6 +6,7 @@ import Login from "./Login";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useState } from "react";
 import Register from "./Register";
+import { Helmet } from "react-helmet-async";
 
 export default function JoinUs() {
     const {theme} =  useAuth()

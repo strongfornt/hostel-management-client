@@ -1,11 +1,17 @@
 import { MdEmail } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth";
 import defaultProfile from './../../../assets/Profile/deFaultProfile1.png'
+import { Helmet } from "react-helmet-async";
+
 export default function AdminProfile() {
     const {user} = useAuth();
 
   return (
     <>
+  <Helmet>
+        <title>DineEase | Profile</title>
+      </Helmet>
+    
         <section className="flex md:ml-48 lg:ml-0 items-center min-h-[calc(100vh-72px)] md:min-h-screen   justify-center " >
         <div className="w-full max-w-md px-8 py-4 mt-16 bg-[#3F72AF] rounded-lg shadow-lg ">
           <div className="flex justify-center -mt-16 md:justify-center">

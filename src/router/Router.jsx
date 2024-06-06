@@ -10,6 +10,7 @@ import Error from "../shared/Error/Error";
 import AdminProfile from "../Dashboard/AdminDashboard/AdminProfile/AdminProfile";
 import ManageUsers from "../Dashboard/AdminDashboard/ManageUser/ManageUsers";
 import DashboardLayout from "../RootLayout/DashboardLayout";
+import AddMeal from "../Dashboard/AdminDashboard/AddMeal/AddMeal";
 
 export const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
            {
             path:'manageUsers',
             element:<ManageUsers/>
+           },
+           {
+            path:'addMeal',
+            element:<AddMeal/>
            }
            //admin dashboard end ================================================
         ]

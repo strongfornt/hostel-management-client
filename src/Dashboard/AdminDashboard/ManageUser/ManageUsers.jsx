@@ -2,12 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
+
 
 export default function ManageUsers() {
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
-  const [nameSearch, setNameSearch] = useState("");
-  const [emailSearch, setEmailSearch] = useState("");
+  const [nameSearch, setNameSearch] = useState('');
+  const [emailSearch, setEmailSearch] = useState('');
   // use tanstack for fetch users data =====================
   const { data: allUsers = [] } = useQuery({
     queryKey: ["users",nameSearch,emailSearch],
@@ -35,12 +37,13 @@ export default function ManageUsers() {
   };
   //use tanstack Mutation for update users role ================
 
-  console.log(nameSearch);
-  console.log(emailSearch);
 
   return (
     <>
-      <section className=" my-7 md:my-10  min-h-[calc(100vh-72px)] md:min-h-screen  flex flex-col  md:ml-[15rem] lg:ml-1  xl:ml-44  ">
+     <Helmet>
+        <title>DineEase | ManageUsers</title>
+      </Helmet>
+      <section className=" my-7 md:my-10    flex flex-col  md:ml-[15rem] lg:ml-1  xl:ml-44  ">
         <div>
           <h1 className=" text-center text-2xl md:text-3xl font-bold text-[#4b5664] mb-2">
             User Management <span className="text-[#3F72AF]">Hub</span>
@@ -213,7 +216,7 @@ export default function ManageUsers() {
                       <p></p>
                     </td>
                     <td className="p-3 ">
-                      <span className="px-3 py-1 font-semibold rounded-md  bg-[#3F72AF] text-gray-900 dark:text-gray-50">
+                      <span className="px-3 py-1 font-semibold rounded-md  bg-indigo-100/60 text-indigo-500  ">
                         <span>{user?.badge}</span>
                       </span>
                     </td>

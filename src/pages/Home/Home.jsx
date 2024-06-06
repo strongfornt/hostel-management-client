@@ -5,7 +5,8 @@ import Membership from "./HomeElements/Membership/Membership";
 import Review from "./HomeElements/Reviews/Review";
 import Partnership from "./HomeElements/Partnership/Partnership";
 import Subscribe from "./HomeElements/Subscribe/Subscribe";
-import { Helmet } from "react-helmet-async/lib";
+import { Helmet } from "react-helmet-async";
+
 
 
 export default function Home() {
