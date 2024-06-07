@@ -1,5 +1,5 @@
 import ReactStars from "react-rating-stars-component";
-import food1 from "../../../../assets/Food/food1.jpg";
+
 
 // eslint-disable-next-line react/prop-types
 export default function MealsCard({meal}) {

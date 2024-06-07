@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+
 import { Fade } from "react-awesome-reveal";  
 import { useEffect, useState } from "react";
 import moment from 'moment-timezone';
@@ -11,7 +11,7 @@ import { imageUpload } from "../../../shared/util/imageUpload";
 import Swal from "sweetalert2";
 
 export default function AddMeal() {
-  const { user, theme, logOut } = useAuth();
+  const { user, theme } = useAuth();
   const {  email } = user || {};
   const [currentTime, setCurrentTime] = useState(
     moment.tz('Asia/Dhaka').format('MMMM DD, YYYY hh:mm:ss A')
@@ -34,7 +34,7 @@ export default function AddMeal() {
     handleSubmit,
     reset,
     // watch,
-    formState: { errors, isSubmitted },
+    // formState: { errors, isSubmitted },
   } = useForm();
 
   const formSubmit = async (data) => {
@@ -97,7 +97,7 @@ export default function AddMeal() {
   return (
     <>
       <Helmet>
-        <title>TaskBud | CreateAssignment</title>
+        <title>DineEase | AddMeal</title>
       </Helmet>
 
       {/* <div
