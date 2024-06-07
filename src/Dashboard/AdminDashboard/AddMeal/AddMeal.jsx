@@ -1,78 +1,98 @@
 import toast from "react-hot-toast";
-import { Fade } from "react-awesome-reveal";
-
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Fade } from "react-awesome-reveal";  
+import { useEffect, useState } from "react";
+import moment from 'moment-timezone';
 
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Helmet } from "react-helmet-async";
+import { useForm } from "react-hook-form";
+import { imageUpload } from "../../../shared/util/imageUpload";
+import Swal from "sweetalert2";
 
 export default function AddMeal() {
   const { user, theme, logOut } = useAuth();
-  const { displayName, email, photoURL } = user || {};
+  const {  email } = user || {};
+  const [currentTime, setCurrentTime] = useState(
+    moment.tz('Asia/Dhaka').format('MMMM DD, YYYY hh:mm:ss A')
+  );
+
   const axiosSecure = useAxiosSecure();
-  const navigate = useNavigate();
+  // update current time and date =============================
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(moment.tz('Asia/Dhaka').format('MMMM DD, YYYY hh:mm:ss A'));
+    }, 1000);
 
-  // const [startDate, setStartDate] = useState(new Date());
-  // const date = startDate.toLocaleDateString("en-US", {
-  //   month: "short",
-  //   day: "2-digit",
-  //   year: "numeric",
-  // });
+    return () => clearInterval(interval);
+  }, []);
+  // update current time and date =============================
+  
+  //handle form submit =======================================
+  const {
+    register,
+    handleSubmit,
+    reset,
+    // watch,
+    formState: { errors, isSubmitted },
+  } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const title = form.title.value;
-    const image = form.image.value;
-    const difficulty = form.difficulty.value;
-    const marks = form.marks.value;
-    const description = form.description.value;
-    const email = form.email.value;
-    const name = form.name.value;
+  const formSubmit = async (data) => {
+    const {title,image,category,ingredients,price,rating,description} = data || {};
+    const imageFile = image[0];
+    const ingredientsItems = ingredients.split(',')
+    //upload image to the image bb =================
+    const imageUrl = await imageUpload(imageFile);
+    //upload image to the image bb =================
 
-    const assignment = {
-      image,
-      title,
-      difficulty,
-      description,
-      marks,
-
-      creator: {
-        email,
-        name,
-        photo: photoURL,
-      },
-    };
-
-    const postData = async () => {
-      try {
-        const { data } = await axiosSecure.post(
-          // "https://online-study-server-ten.vercel.app/assignment?email=${email}",
-          `/assignment?email=${email}`,
-          assignment
-        );
-        if (data.insertedId) {
-          toast.success(" Data added smoothly!");
-          form.reset();
+    // if image url then send to the database =========
+    if(imageUrl){
+      const mealInfo = {
+        title,
+        images: imageUrl,
+        category,
+        ingredientsItems,
+        price,
+        rating,
+        description,
+        currentTime,
+        likes: 0,
+        reviews: 0,
+        creator: {
+          email: user?.email || 'Anonymous',
+          name: user?.displayName || 'Anonymous'
         }
-      } catch (err) {
-        if (err.response.status === 401 || err.response.status === 403) {
-          toast.error(
-            `${err.response.data.message} log in with valid credentials.`
-          );
-          await logOut();
-          navigate("/login");
-        } else {
-          toast.error("Data upload paused. Retry with stable connection.");
+    }
+    
+    //call the meals collection api start================================
+      try{
+        const res = await axiosSecure.post('/meals',mealInfo)
+        console.log(res);
+        if(res?.data?.insertedId){
+            // toast.success('Meals added smoothly!')
+             //    swall message start======================x
+          Swal.fire({
+            title: "Meal Added!",
+            text: "The meal has been successfully added. ",
+            icon: "success",
+          });
+          //    swall message start======================x
+            reset()
         }
+      }catch(error){
+        Swal.fire({
+          title: "Failed to Add Meal!",
+          text: "Oops! Something went wrong while trying to add the meal.",
+          icon: "error",
+        });
       }
-    };
+    //call the meals collection api end================================
+  
+    }
+    // if image url then send to the database end =========
+  }
+  //handle form submit end=======================================
 
-    postData();
-  };
 
   return (
     <>
@@ -118,7 +138,7 @@ export default function AddMeal() {
 
       <section className="p-6 md:ml-[15rem] lg:ml-1  xl:ml-44  ">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(formSubmit)}
           className="container flex flex-col mx-auto space-y-4 "
         >
           <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-base-100">
@@ -131,20 +151,18 @@ export default function AddMeal() {
               >
                 <p className="font-medium text-lg text-[#3F72AF]">
                   <span
-                    className={`${
-                      theme == "light" ? "text-[#4b5664]" : "text-white"
-                    }`}
+                    className={`${theme == "light" ? "text-[#4b5664]" : "text-white"
+                      }`}
                   >
                     Add
                   </span>{" "}
                   Meal{" "}
                 </p>
                 <p
-                  className={`text-xs  ${
-                    theme == "light" ? "text-[#4b5664]" : "text-[#d4cccc]"
-                  } `}
+                  className={`text-xs  ${theme == "light" ? "text-[#4b5664]" : "text-[#d4cccc]"
+                    } `}
                 >
-                 Submit meal information including title, category, image, ingredients, description, price, and rating.
+                  Submit meal information including title, category, image, ingredients, description, price, and rating.
                 </p>
               </Fade>
             </div>
@@ -155,6 +173,7 @@ export default function AddMeal() {
                 </label>
                 <input
                   required
+                  {...register("title")}
                   type="text"
                   name="title"
                   id="title"
@@ -164,11 +183,12 @@ export default function AddMeal() {
               </div>
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="image" className="block text-sm    ">
-                Meal Image
+                  Meal Image
                 </label>
                 <input
                   required
-                  type="text"
+                  {...register("image")}
+                  type="file"
                   name="image"
                   id="image"
                   placeholder="Meal image"
@@ -177,86 +197,94 @@ export default function AddMeal() {
               </div>
 
               <div className="col-span-full sm:col-span-3">
-                <label htmlFor="difficulty" className="block text-sm">
+                <label htmlFor="category" className="block text-sm">
                   Meal Category
                 </label>
 
                 <select
                   required
-                  id="difficulty"
-                  name="difficulty"
+                  {...register("category")}
+                  id="category"
+                  name="category"
                   className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300  focus:ring-1 focus:ring-[#3F72AF]"
                 >
-                  <option value="easy">Easy</option>
-                  <option value="medium">Medium</option>
-                  <option value="hard">Hard</option>
+                  <option value="Breakfast">Breakfast</option>
+                  <option value="Lunch">Lunch</option>
+                  <option value="Dinner">Dinner</option>
                 </select>
               </div>
               <div className="col-span-full sm:col-span-3">
                 <label htmlFor="ingredients" className="block text-sm">
-                 Ingredients
+                  Ingredients
                 </label>
                 <input
                   required
+                  {...register("ingredients")}
                   type="text"
                   name="ingredients"
                   id="ingredients"
-                
-                  placeholder="Ingredients"
+
+                  placeholder="egg, potatoes..."
                   className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
                 />
               </div>
-              <div className="col-span-full sm:col-span-2">
+              <div className="col-span-full sm:col-span-3">
                 <label htmlFor="price" className="block text-sm">
-                 Price
+                  Price
                 </label>
                 <input
                   required
+                  {...register("price")}
                   type="number"
                   name="price"
                   id="price"
-                  min={0.1}
-                 
+                  step="0.01" 
+                  min="0"
+
                   placeholder="$Price"
                   className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
                 />
               </div>
-              <div className="col-span-full sm:col-span-2">
+              <div className="col-span-full sm:col-span-3">
                 <label htmlFor="rating" className="block text-sm">
-                 Rating
+                  Rating
                 </label>
                 <input
                   required
+                  {...register("rating")}
                   type="number"
                   name="rating"
                   id="rating"
+                  step="0.01"
                   min={1}
                   max={5}
                   placeholder="Rating"
                   className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
                 />
               </div>
-              <div className="col-span-full sm:col-span-2">
-                <label htmlFor="like" className="block text-sm">
-                 Time
+              <div className="col-span-full sm:col-span-3">
+                <label htmlFor="time" className="block text-sm">
+                  Time
                 </label>
                 <input
                   required
                   type="text"
-                  name="like"
-                  id="like"
-                  
-                  placeholder="Like"
-                  className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
+                  name="time"
+                  id="time"
+                  readOnly
+                  value={currentTime}
+                  placeholder="Time"
+                  className="w-full px-3 cursor-not-allowed py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
                 />
               </div>
-             
+
               <div className="col-span-full ">
                 <label htmlFor="description" className="block text-sm">
                   Short description
                 </label>
                 <textarea
                   required
+                  {...register("description")}
                   type="text"
                   name="description"
                   id="description"
@@ -276,18 +304,16 @@ export default function AddMeal() {
               >
                 <p className="font-medium text-lg text-[#3F72AF] ">
                   <span
-                    className={`${
-                      theme == "light" ? "text-[#4b5664]" : "text-white"
-                    }`}
+                    className={`${theme == "light" ? "text-[#4b5664]" : "text-white"
+                      }`}
                   >
                     Per
                   </span>
                   sonal information{" "}
                 </p>
                 <p
-                  className={`text-xs  ${
-                    theme == "light" ? "text-[#4b5664]" : "text-[#d4cccc]"
-                  } `}
+                  className={`text-xs  ${theme == "light" ? "text-[#4b5664]" : "text-[#d4cccc]"
+                    } `}
                 >
                   {" "}
                   Provide your name and email for meal submission verification.
@@ -319,8 +345,8 @@ export default function AddMeal() {
                   name="name"
                   id="name"
                   placeholder="name"
-                  defaultValue={displayName || "Anonymous"}
-                  className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
+                  defaultValue={user?.displayName || "Anonymous"}
+                  className="w-full px-3 py-2 border  outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
                 />
               </div>
 

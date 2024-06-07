@@ -1,20 +1,22 @@
 import ReactStars from "react-rating-stars-component";
 import food1 from "../../../../assets/Food/food1.jpg";
 
-export default function MealsCard() {
+// eslint-disable-next-line react/prop-types
+export default function MealsCard({meal}) {
+  const {images, price, rating, title } = meal || {}
   return (
     <>
       <div className=" overflow-hidden  rounded-lg shadow-lg bg-[#F9F7F7]">
         <div className="overflow-hidden">
         <div
-          style={{ backgroundImage: `url(${food1})` }}
+          style={{ backgroundImage: `url(${images})` }}
           className="object-cover bg-cover w-full h-48 rounded-t-lg hover:scale-105 transition-all duration-300  "
         >
          
           
           <div className="bg-black/25 h-full">
             <div  className="bg-[#3F72AF] w-fit px-2 absolute translate-x-3 translate-y-3 rounded-sm " >
-            <h1 className="text-lg font-bold text-white ">$129</h1>  
+            <h1 className="text-lg font-bold text-white ">${price}</h1>  
             </div>
           </div>
         </div>
@@ -22,7 +24,7 @@ export default function MealsCard() {
         <div className=" ">
         <ReactStars
             count={5}
-            value={3}
+            value={rating}
             edit={false} // Set readonly
             size={24}
             activeColor="#ffd700"
@@ -31,7 +33,7 @@ export default function MealsCard() {
 
           <div className="flex items-center justify-between px-1  bg-[#F9F7F7]">
             <h1 className="text-xl font-bold text-[#4b5664] uppercase ">
-              NIKE AIR
+                {title}
             </h1>
             {/* <h1 className="text-lg font-bold text-[#4B5664]">$129</h1> */}
           </div>

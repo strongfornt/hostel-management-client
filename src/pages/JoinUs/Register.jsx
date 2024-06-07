@@ -53,6 +53,7 @@ export default function Register({setTabIndex}) {
             updateUserProfile(auth.currentUser, {
                 displayName: name,
                 photoURL: image,
+                
               })
                 .then(() => {
                   setUser({ ...user, displayName: name, photoURL: image });
@@ -162,7 +163,7 @@ export default function Register({setTabIndex}) {
                   name="photo"
                   id="photo"
                   required
-                  placeholder="photo url"
+                  placeholder="photo"
                   className="w-full px-3 py-2 border rounded-md border-gray-300  bg-transparent  outline-none focus:ring-1 focus:ring-[#3F72AF] "
                 />
               </div>
