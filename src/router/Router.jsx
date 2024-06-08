@@ -13,6 +13,7 @@ import DashboardLayout from "../RootLayout/DashboardLayout";
 import AddMeal from "../Dashboard/AdminDashboard/AddMeal/AddMeal";
 import AllMeals from "../Dashboard/AdminDashboard/AllMeals/AllMeals";
 import Meals from "../pages/Meals/Meals";
+import UpcomingMeals from "../Dashboard/AdminDashboard/UpcomingMeals/UpcomingMeals";
 
 export const router = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ export const router = createBrowserRouter([
            {
             path:'allMeals',
             element:<AllMeals/>
+           },
+           {
+            path:'upcomingMeals',
+            element:<UpcomingMeals/>
            }
            //admin dashboard end ================================================
         ]

@@ -38,14 +38,18 @@ export default function AddMeal() {
   } = useForm();
 
   const formSubmit = async (data) => {
-    const {title,image,category,ingredients,price,rating,description} = data || {};
+    const {title,image,category,ingredients,price: priceStr, rating: ratingStr, description} = data || {};
     const imageFile = image[0];
     const ingredientsItems = ingredients.split(',')
+    const price = parseFloat(priceStr);
+    const rating = parseFloat(ratingStr);
+ 
+  
     //upload image to the image bb =================
     const imageUrl = await imageUpload(imageFile);
     //upload image to the image bb =================
 
-    // if image url then send to the database =========
+    // // if image url then send to the database =========
     if(imageUrl){
       const mealInfo = {
         title,
@@ -63,11 +67,11 @@ export default function AddMeal() {
           name: user?.displayName || 'Anonymous'
         }
     }
-    
+   
     //call the meals collection api start================================
       try{
-        const res = await axiosSecure.post('/meals',mealInfo)
-        console.log(res);
+        const res = await axiosSecure.post('/upcomingMeals',mealInfo)
+      
         if(res?.data?.insertedId){
             // toast.success('Meals added smoothly!')
              //    swall message start======================x

@@ -37,7 +37,7 @@ export default function AllMeals() {
         setSelectedOption(option?.value);
       };
        //select option for the like and review ==================
-      console.log(selectedOption);
+     
   return (
     <>
       <Helmet>
