@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import { ChakraProvider } from '@chakra-ui/react'
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router/Router";
@@ -16,7 +16,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ContextProvider>
       <HelmetProvider>
        <QueryClientProvider client={queryClient} >
+       <ChakraProvider>
        <RouterProvider router={router} />
+    </ChakraProvider>
+       
        </QueryClientProvider>
       </HelmetProvider>
       <Toaster />

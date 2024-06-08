@@ -33,7 +33,7 @@ export default function MealsCard({meal}) {
            
 
           <div className="flex items-center justify-between px-1  bg-[#F9F7F7]">
-            <h1 className="text-xl font-bold text-[#4b5664] uppercase ">
+            <h1 className="text-xl font-bold text-[#4b5664]  ">
                 {title}
             </h1>
             {/* <h1 className="text-lg font-bold text-[#4B5664]">$129</h1> */}
