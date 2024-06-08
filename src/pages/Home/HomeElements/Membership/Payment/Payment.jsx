@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async/lib";
+import { Helmet } from "react-helmet-async";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
 import useAuth from "../../../../../hooks/useAuth";
@@ -12,6 +12,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_KEY_PK);
 export default function Payment() {
   const { theme } = useAuth();
   const { data } = useLoaderData();
+  console.log(data);
   const {
     name: badgeName,
     price: totalPrice,

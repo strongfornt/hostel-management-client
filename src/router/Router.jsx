@@ -12,6 +12,7 @@ import ManageUsers from "../Dashboard/AdminDashboard/ManageUser/ManageUsers";
 import DashboardLayout from "../RootLayout/DashboardLayout";
 import AddMeal from "../Dashboard/AdminDashboard/AddMeal/AddMeal";
 import AllMeals from "../Dashboard/AdminDashboard/AllMeals/AllMeals";
+import Meals from "../pages/Meals/Meals";
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             path:'/payment/:name',
             element:<UserPrivateRoute><Payment/></UserPrivateRoute>,
             loader:({params}) => axios.get(`http://localhost:5000/membership/${params.name}`)
+        },
+        {
+          path:'meals',
+          element:<Meals/>
         }
       ]
     },

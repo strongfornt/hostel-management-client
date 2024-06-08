@@ -27,6 +27,7 @@ export default function MealsCard({meal}) {
             value={rating}
             edit={false} // Set readonly
             size={24}
+            isHalf={true}
             activeColor="#ffd700"
           />
            

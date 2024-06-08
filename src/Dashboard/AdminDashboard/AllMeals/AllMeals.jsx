@@ -4,23 +4,40 @@ import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { CiEdit } from "react-icons/ci";
+import Select from 'react-select';
+import { useState } from "react";
+
 
 export default function AllMeals() {
     const axiosSecure = useAxiosSecure();
-
+    const [selectedOption, setSelectedOption] = useState(null);
+    // const [allMeals,setAllMeals] = useState([])
+    
     //tanstack for fetching data start =======================================
         const {data: allMeals = []} = useQuery({
-            queryKey: ['allMeals'],
+            queryKey: ['allMeals',selectedOption],
             queryFn: async()=> {
-                const {data} = await axiosSecure.get(`/meals`)
+                const {data} = await axiosSecure.get(`/allMeals?sort=${selectedOption}`)
                 return data;
             }
         })
+      
+
     //tanstack for fetching data end =======================================
 
 
-        console.log(allMeals);
-
+       //select option for the like and review ==================
+       const options = [
+        { value: 'likes', label: 'Total Likes' },
+        { value: 'reviews', label: 'Total Reviews' },
+       
+        
+      ];
+      const handleChange = (option) => {
+        setSelectedOption(option?.value);
+      };
+       //select option for the like and review ==================
+      console.log(selectedOption);
   return (
     <>
       <Helmet>
@@ -40,7 +57,28 @@ export default function AllMeals() {
         {/* main section start ====================================================== */}
 
       <div className="container p-2 mx-auto sm:p-4 text-gray-100 dark:text-gray-800">
-	<h2 className="mb-4 text-2xl font-semibold leading-tight">All Meals</h2>
+	<div className="flex items-center justify-between mb-4" >
+    <h2 className=" text-2xl font-semibold leading-tight">All Meals</h2>
+        <div className="flex items-center gap-5" >
+        <div className="  ">
+              <button
+                onClick={() => {
+                 setSelectedOption(null)
+                }}
+                className="px-4 py-1 bg-[#3F72AF] text-white rounded-md hover:bg-[#4b8bd9] duration-300 font-medium"
+              >
+                Reset
+              </button>
+            </div>
+        <Select
+        // value={selectedOption}
+        defaultValue={selectedOption}
+        onChange={handleChange}
+        options={options}
+        placeholder="Sort By"
+      />
+        </div>
+    </div>
 	<div className="overflow-x-auto">
 		<table className="min-w-full text-xs">
 			<colgroup>
@@ -86,7 +124,7 @@ export default function AllMeals() {
 					<td className="px-3 py-2   ">
 						<p><RiDeleteBin6Line className="text-pink-500 text-xl" /></p>
 					</td>
-					<td className="px-3 py-2 flex justify-end ">
+					<td className="px-3 py-2 flex justify-end  items-center">
                     <p><HiOutlineViewGridAdd className="text-indigo-500 text-xl" /></p>
 					</td>
 				</tr>)

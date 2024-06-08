@@ -15,9 +15,9 @@ export default function MealsByCategory() {
   const axiosPublic = useAxiosPublic();
 
   const { data: mealsData = [], isLoading } = useQuery({
-    queryKey: ['meals'],
+    queryKey: ['allMeals'],
     queryFn: async () => {
-      const { data } = await axiosPublic.get(`/meals`)
+      const { data } = await axiosPublic.get(`/allMeals`)
       return data;
     }
   })
