@@ -7,15 +7,15 @@ import {
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-    useDisclosure,
-  } from '@chakra-ui/react'
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import UpcomingMealForm from "./UpcomingMealForm";
 
@@ -23,29 +23,29 @@ import UpcomingMealForm from "./UpcomingMealForm";
 export default function UpcomingTable({ meal }) {
   const axiosPublic = useAxiosPublic();
   const queryClient = useQueryClient();
-  const [upcomingMeal,setUpcomingMeal] = useState({})
-  const [message, setMessage ] = useState('')
-// chakri ka function ===========================
-const OverlayOne = () => (
+  const [upcomingMeal, setUpcomingMeal] = useState({});
+  const [message, setMessage] = useState("");
+  // chakri ka function ===========================
+  const OverlayOne = () => (
     <ModalOverlay
-      bg='blackAlpha.300'
-      backdropFilter='blur(10px) hue-rotate(90deg)'
+      bg="blackAlpha.300"
+      backdropFilter="blur(10px) hue-rotate(90deg)"
     />
-  )
- const { isOpen, onOpen, onClose } = useDisclosure()
-// chakri ka function end ===========================
-  const [overlay, setOverlay] = useState(<OverlayOne />)
+  );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
+  // chakri ka function end ===========================
   const { title, creator, currentTime, likes } = meal || {};
 
   // post to mealCollection using mutation tanstack ==============================
   const { mutateAsync } = useMutation({
     mutationFn: async ({ _id, mealInfo }) => {
-        const res = await axiosPublic.post(`/meals/${_id}`, { mealInfo });
-        console.log(res);
+      await axiosPublic.post(`/meals/${_id}`, { mealInfo });
+    
     },
     onSuccess: () => {
       toast.success(message);
-      setUpcomingMeal({})
+      setUpcomingMeal({});
       queryClient.invalidateQueries({ queryKey: ["upcomingMeals"] });
     },
   });
@@ -53,7 +53,6 @@ const OverlayOne = () => (
 
   //publish the meal =================
   const handlePublish = async (specificMeal) => {
-    
     const {
       title,
       images,
@@ -66,7 +65,7 @@ const OverlayOne = () => (
       likes,
       reviews,
       creator,
-      _id
+      _id,
     } = specificMeal || {};
     const mealInfo = {
       title,
@@ -79,55 +78,55 @@ const OverlayOne = () => (
       currentTime,
       likes,
       reviews,
-      status: 'Available',
+      status: "Available",
       creator: {
         email: creator?.email,
         name: creator?.name,
       },
     };
     // console.log(mealInfo);
-    await mutateAsync({_id,mealInfo})
+    await mutateAsync({ _id, mealInfo });
   };
   //publish the meal =================
- 
-  // send to the upcoming status ========================================
- 
-  const handleUpcoming =  async  () =>{
-    const {
-        title,
-        images,
-        category,
-        ingredientsItems,
-        price,
-        rating,
-        description,
-        currentTime,
-        likes,
-        reviews,
-        creator,
-        _id
-      } = upcomingMeal || {};
-      const mealInfo = {
-        title,
-        images,
-        category,
-        ingredientsItems,
-        price,
-        rating,
-        description,
-        currentTime,
-        likes,
-        reviews,
-        status: 'Upcoming',
-        creator: {
-          email: creator?.email,
-          name: creator?.name,
-        },
-      };
-      await mutateAsync({_id,mealInfo})
 
-  }
- 
+  // send to the upcoming status ========================================
+
+  const handleUpcoming = async () => {
+    const {
+      title,
+      images,
+      category,
+      ingredientsItems,
+      price,
+      rating,
+      description,
+      currentTime,
+      likes,
+      reviews,
+      creator,
+      _id,
+    } = upcomingMeal || {};
+    const mealInfo = {
+      title,
+      images,
+      category,
+      ingredientsItems,
+      price,
+      rating,
+      description,
+      currentTime,
+      likes,
+      reviews,
+      status: "Upcoming",
+      upcomingId: _id ,
+      creator: {
+        email: creator?.email,
+        name: creator?.name,
+      },
+    };
+    await mutateAsync({ _id, mealInfo });
+  };
+
   // send to the upcoming status end ========================================
 
   return (
@@ -148,9 +147,8 @@ const OverlayOne = () => (
         <td className="px-3 py-2 ">
           <button
             onClick={() => {
-                setMessage("Meal is now on the menu!")
-                handlePublish(meal)
-                
+              setMessage("Meal is now on the menu!");
+              handlePublish(meal);
             }}
             className="cursor-pointer"
           >
@@ -158,21 +156,26 @@ const OverlayOne = () => (
           </button>
         </td>
         <td className="px-3 py-2   ">
-          <button 
-            onClick={()=> {
-                setUpcomingMeal(meal)
-                setOverlay(<OverlayOne />)
-                 onOpen()
+          <button
+            onClick={() => {
+              setUpcomingMeal(meal);
+              setOverlay(<OverlayOne />);
+              onOpen();
             }}
-          className="cursor-pointer">
+            className="cursor-pointer"
+          >
             <MdOutlineUpcoming className="text-pink-500 text-xl" />
           </button>
         </td>
       </tr>
 
-
       {/* Modal related work ======================================== */}
-      <Modal isCentered scrollBehavior="inside" isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isCentered
+        scrollBehavior="inside"
+        isOpen={isOpen}
+        onClose={onClose}
+      >
         {overlay}
         <ModalContent>
           <ModalHeader>Add Upcoming meal</ModalHeader>
@@ -181,8 +184,15 @@ const OverlayOne = () => (
             <UpcomingMealForm meal={upcomingMeal} />
           </ModalBody>
           <ModalFooter>
-            <button onClick={() => { setMessage("Upcoming meal added!"); handleUpcoming(); onClose()} } className="bg-[#3F72AF] text-white px-2 py-1 rounded-md font-sans " >
-                Add Upcoming Meal
+            <button
+              onClick={() => {
+                setMessage("Upcoming meal added!");
+                handleUpcoming();
+                onClose();
+              }}
+              className="bg-[#3F72AF] text-white px-2 py-1 rounded-md font-sans "
+            >
+              Add Upcoming Meal
             </button>
           </ModalFooter>
         </ModalContent>

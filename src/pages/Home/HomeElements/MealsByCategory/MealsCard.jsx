@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 
 // eslint-disable-next-line react/prop-types
 export default function MealsCard({meal}) {
-  const {images, price, rating, title } = meal || {}
+  const {images, price, rating, title, status ,category } = meal || {}
   return (
     <>
       <div className=" overflow-hidden  rounded-lg shadow-lg bg-[#F9F7F7]">
@@ -15,9 +15,9 @@ export default function MealsCard({meal}) {
          
           
           <div className="bg-black/25 h-full">
-            <div  className="bg-[#3F72AF] w-fit px-2 absolute translate-x-3 translate-y-3 rounded-sm " >
-            <h1 className="text-lg font-bold text-white ">${price}</h1>  
-            </div>
+            <h1 className="bg-[#4b5664] px-2 py-1 text-white w-fit translate-x-3 translate-y-3 font-mono rounded-md">
+                {status}
+              </h1>
           </div>
         </div>
         </div>
@@ -32,10 +32,15 @@ export default function MealsCard({meal}) {
           />
            
 
-          <div className="flex items-center justify-between px-1  bg-[#F9F7F7]">
+          <div className=" px-1  bg-[#F9F7F7]">
             <h1 className="text-xl font-bold text-[#4b5664]  ">
                 {title}
             </h1>
+            <div className="flex items-center justify-between    bg-[#F9F7F7]">
+          <h1 className="text-lg font-serif text-[#3F72AF]">{category}</h1>
+          <h1 className="text-lg font-mono text-[#4B5664]">${price}</h1>
+          
+        </div> 
             {/* <h1 className="text-lg font-bold text-[#4B5664]">$129</h1> */}
           </div>
         </div>

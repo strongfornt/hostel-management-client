@@ -1,16 +1,18 @@
-// eslint-disable-next-line react/prop-types
-export default function UpcomingMealForm({ meal }) {
-  const {
-    title,
-    images,
-    category,
-    ingredientsItems,
-    price,
-    rating,
-    currentTime,
-    description,
-  } = meal || {};
+/* eslint-disable react/prop-types */
 
+
+
+export default function AllMealsForm({meal,register}) {
+    const {
+        title,
+        images,
+        category,
+        ingredientsItems,
+        price,
+        rating,
+        currentTime,
+        description,
+      } = meal || {};
   return (
     <>
       <fieldset className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-base-100">
@@ -20,9 +22,10 @@ export default function UpcomingMealForm({ meal }) {
               Assignment Title
             </label>
             <input
-              readOnly
+              {...register('title')}
               type="text"
               name="title"
+              required
               id="title"
               defaultValue={title}
               placeholder="Assignment title "
@@ -35,12 +38,13 @@ export default function UpcomingMealForm({ meal }) {
             </label>
             <input
               readOnly
+              {...register('image')}
               defaultValue={images}
               type="text"
               name="image"
               id="image"
               placeholder="Meal image"
-              className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300  focus:ring-1 focus:ring-[#3F72AF]"
+              className="w-full px-3 py-2 cursor-not-allowed border outline-none rounded-md bg-transparent border-gray-300  focus:ring-1 focus:ring-[#3F72AF]"
             />
           </div>
 
@@ -51,7 +55,7 @@ export default function UpcomingMealForm({ meal }) {
 
             <select
               required
-              readOnly
+              {...register("category")}    
               defaultValue={category}
               id="category"
               name="category"
@@ -67,7 +71,8 @@ export default function UpcomingMealForm({ meal }) {
               Ingredients
             </label>
             <input
-              readOnly
+              required
+              {...register('ingredients')}
               defaultValue={ingredientsItems}
               type="text"
               name="ingredients"
@@ -81,7 +86,8 @@ export default function UpcomingMealForm({ meal }) {
               Price
             </label>
             <input
-              readOnly
+              required
+              {...register('price')}
               defaultValue={price}
               type="number"
               name="price"
@@ -97,7 +103,8 @@ export default function UpcomingMealForm({ meal }) {
               Rating
             </label>
             <input
-              readOnly
+               required
+               {...register('rating')}
               defaultValue={rating}
               type="number"
               name="rating"
@@ -115,6 +122,7 @@ export default function UpcomingMealForm({ meal }) {
             </label>
             <input
               readOnly
+               {...register('time')}
               type="text"
               name="time"
               id="time"
@@ -129,7 +137,8 @@ export default function UpcomingMealForm({ meal }) {
               Short description
             </label>
             <textarea
-              readOnly
+              required
+              {...register('description')}
               defaultValue={description}
               type="text"
               name="description"
@@ -141,5 +150,5 @@ export default function UpcomingMealForm({ meal }) {
         </div>
       </fieldset>
     </>
-  );
+  )
 }

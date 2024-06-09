@@ -93,7 +93,7 @@ export default function Nav() {
       </NavLink>
       <NavLink
         onClick={() => setMenu(false)}
-        to="/addTouristSpot"
+        to="/upcomingPublicMeals"
         className={({ isActive }) =>
           isActive
             ? ` text-[#3F72AF] w-fit text-sm font-medium  `
@@ -161,7 +161,7 @@ export default function Nav() {
                       setMenu(false);
                       
                     }}
-                    to="/upcomingMeals"
+                    to="/upcomingPublicMeals"
                     className={({ isActive }) =>
                       isActive
                         ? ` text-[#3F72AF] w-fit text-sm font-medium  `

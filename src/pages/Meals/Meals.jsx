@@ -2,12 +2,12 @@ import { Helmet } from "react-helmet-async";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery} from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import MealsCard from "./MealsCard";
 import Spinner from "../../shared/Spinner/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 export default function Meals() {
   const { theme } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -92,7 +92,7 @@ console.log(search);
       </div>
 
       {/* main section start from there =================================== */}
-      <div className="mt-4 px-2">
+      <section className="mt-4 px-2">
         <h1 className=" text-center text-2xl md:text-3xl font-bold text-[#4b5664] mb-2">
           Find Your Perfect <span className="text-[#3F72AF]">Meal</span>
         </h1>
@@ -120,7 +120,7 @@ console.log(search);
                 Filter By Price Range
               </option>
               {/* <option value={4}>Less then $4</option> */}
-              <option value={5}>Grater then $5</option>
+              <option value={5}>Less then $5</option>
               <option value={7}>Grater then $7</option>
             </select>
             
@@ -203,7 +203,7 @@ console.log(search);
           </div>
           {/* search functionality end here ============================ */}
         </div>
-      </div>
+      </section>
 
       <InfiniteScroll
         dataLength={mealsData ? mealsData?.length : 0}
