@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
+import { AiOutlineLike } from "react-icons/ai";
+import { BiSolidLike } from "react-icons/bi";
 
-
-export default function UpPublicMealsCard({meal}) {
+export default function UpPublicMealsCard({ meal }) {
+  const [like, setLike] = useState(false);
   return (
     <>
       <div className=" overflow-hidden  rounded-lg shadow-lg bg-[#F9F7F7]">
@@ -19,21 +22,34 @@ export default function UpPublicMealsCard({meal}) {
         </div>
         <div className=" ">
           <div className=" px-1 my-1 bg-[#F9F7F7]">
-            <h1 className="text-xl font-bold text-[#4b5664]  ">{meal?.title}</h1>
+            <h1 className="text-xl font-bold text-[#4b5664]  ">
+              {meal?.title}
+            </h1>
 
             <div className="flex items-center justify-between    bg-[#F9F7F7]">
-              <h1 className="text-lg font-serif text-[#3F72AF]">{meal?.category}</h1>
-              <h1 className="text-lg font-mono text-[#4B5664]">${meal?.price}</h1>
+              <h1 className="text-lg font-serif text-[#3F72AF]">
+                {meal?.category}
+              </h1>
+              <h1 className="text-lg font-mono text-[#4B5664]">
+                ${meal?.price}
+              </h1>
             </div>
           </div>
         </div>
 
         <div className="flex items-center justify-between px-1  mb-2 bg-[#F9F7F7]">
-        <button>Like</button>
+          {like ? (
+            <button onClick={() => setLike(false)}>
+              <BiSolidLike className="text-[#3F72AF]" />
+            </button>
+          ) : (
+            <button onClick={() => setLike(true)}>
+              <AiOutlineLike />
+            </button>
+          )}
           <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-[#3F72AF] rounded hover:bg-gray-200 hover:text-[#3F72AF] focus:bg-gray-400 focus:outline-none">
             Details
           </button>
-          
         </div>
       </div>
     </>

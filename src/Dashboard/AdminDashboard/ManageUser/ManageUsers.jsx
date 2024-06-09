@@ -195,7 +195,7 @@ export default function ManageUsers() {
                     <td className="p-3">
                       {user?.role === "Admin" ? (
                         <button>
-                          <p className="bg-emerald-100/60 px-3 font-semibold  cursor-not-allowed py-1 w-fit text-emerald-500  rounded-md">
+                          <p className="bg-emerald-100/60 text-emerald-500 px-3 font-semibold  cursor-not-allowed py-1 w-fit   rounded-md">
                             {user?.role}
                           </p>
                         </button>
@@ -206,7 +206,7 @@ export default function ManageUsers() {
                           }
                           className=" cursor-pointer"
                         >
-                          <p className="bg-red-100/60 px-3 font-semibold   py-1 w-fit text-red-500 rounded-md">
+                          <p className="bg-red-100/60 text-red-500 px-3 font-semibold   py-1 w-fit  rounded-md">
                             Make Admin
                           </p>
                         </button>

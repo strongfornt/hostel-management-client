@@ -5,12 +5,13 @@ import useAuth from "../../hooks/useAuth";
 import UpPublicMealsCard from "./UpPublicMealsCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Spinner from "../../shared/Spinner/Spinner";
 
 export default function UpcomingPublicMeals() {
   const { theme } = useAuth();
   const axiosPublic = useAxiosPublic()
   //use tanstack query for fetch data ============================
-    const{data: mealsData = [] } = useQuery({
+    const{data: mealsData = [], isLoading } = useQuery({
         queryKey:['upcoming_public_meals'],
         queryFn: async()=> {
                 const {data} = await axiosPublic.get('/upcoming_public_meals');
@@ -18,6 +19,10 @@ export default function UpcomingPublicMeals() {
         }
     })
   //use tanstack query for fetch data end ============================
+  if(isLoading){
+    return <Spinner/>
+  }
+  
   return (
     <>
       <Helmet>

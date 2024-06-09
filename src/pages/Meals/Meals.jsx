@@ -9,16 +9,18 @@ import Spinner from "../../shared/Spinner/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {  useState } from "react";
 export default function Meals() {
+ 
   const { theme } = useAuth();
   const axiosPublic = useAxiosPublic();
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('');
   const [priceRange, setPriceRange] = useState('');
 
-    console.log(priceRange);
+
 // Parse the price range input ============================================
   // apply limit function with api ======================
   const getMeals = async ({ pageParam = 1 }) => {
+
     const limit = 4;
     const { data } = await axiosPublic(
       `/meals?limit=${limit}&offset=${pageParam}&category=${category}&price=${priceRange}&search=${search}`
@@ -38,7 +40,7 @@ export default function Meals() {
     },
   });
 
-//   console.log(data);
+
   const mealsData = data?.pages.reduce((acc, page) => {
     return [...acc, ...page.result];
   }, []);
@@ -47,7 +49,8 @@ export default function Meals() {
 //   useEffect(() => {
 //     fetchNextPage({ pageParam: 1 }); // Reset to the first page on filter change
 //   }, [fetchNextPage,category,priceRange]);
-console.log(search);
+// console.log(search);
+
   
   return (
     <>
@@ -130,6 +133,8 @@ console.log(search);
             <select
               onChange={(e) => {
                 setPriceRange('')
+               
+                
                 setCategory(e.target.value)
               }}
               defaultValue="default"

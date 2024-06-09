@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { Link } from "react-router-dom";
 
 export default function AllMealsTable({ meal }) {
   const [upgradableMeal, setUpgradableMeal] = useState({});
@@ -143,9 +144,9 @@ export default function AllMealsTable({ meal }) {
           </button>
         </td>
         <td className="px-3 py-2 flex justify-end  items-center">
-          <button className="cursor-pointer">
+          <Link to={`/mealsDetails/${meal?._id}`}  className="cursor-pointer">
             <HiOutlineViewGridAdd className="text-indigo-500 text-xl" />
-          </button>
+          </Link>
         </td>
       </tr>
 

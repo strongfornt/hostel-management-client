@@ -1,26 +1,24 @@
+
 import { MdEmail } from "react-icons/md";
 import useAuth from "../../../hooks/useAuth";
 import defaultProfile from './../../../assets/Profile/deFaultProfile1.png'
 import { Helmet } from "react-helmet-async";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useUserInfo from "../../../hooks/useUserInfo";
+import Spinner from "../../../shared/Spinner/Spinner";
 
-export default function AdminProfile() {
+
+export default function UserProfile() {
     const {user} = useAuth();
-    const axiosSecure = useAxiosSecure();
-    const {data } = useQuery({
-      queryKey:['total-meals',user?.email],
-      queryFn: async()=> {
-        const {data} = await axiosSecure.get(`/total_meals/${user?.email}`)
-        return data;
-      }
-    })
+    const {userInfo, isUserLoading } = useUserInfo();
   
+    if(isUserLoading){
+        return <Spinner/>
+    }
 
   return (
     <>
   <Helmet>
-        <title>DineEase | AdminProfile</title>
+        <title>DineEase | UserProfile</title>
       </Helmet>
     
         <section className="flex md:ml-48 lg:ml-0 items-center min-h-[calc(100vh-72px)] md:min-h-screen   justify-center " >
@@ -45,7 +43,7 @@ export default function AdminProfile() {
          </div>
 
           <div  >
-            <p className="mt-2 text-base text-center font-mono text-white" >Total Added Meals: {data?.mealsCount || 0} </p>
+            <p className="mt-2 text-base text-center font-mono text-white" >Badge: {userInfo?.badge || 'anonymous'}  </p>
           </div>
         </div>
        
@@ -53,3 +51,4 @@ export default function AdminProfile() {
     </>
   );
 }
+

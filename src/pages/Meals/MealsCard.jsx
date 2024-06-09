@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
+
 export default function MealsCard({ meal }) {
-  const { images, category, title, price, description, status } = meal || {};
+  const { images, category, title, price, description, status , _id } = meal || {};
   return (
     <>
       <div className=" overflow-hidden  rounded-lg shadow-lg bg-[#F9F7F7]">
@@ -36,9 +38,9 @@ export default function MealsCard({ meal }) {
 
         <div className="flex items-center justify-between px-1  mb-2 bg-[#F9F7F7]">
           
-          <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-[#3F72AF] rounded hover:bg-gray-200 hover:text-[#3F72AF] focus:bg-gray-400 focus:outline-none">
+          <Link to={`/mealsDetails/${_id}`} className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-[#3F72AF] rounded hover:bg-gray-200 hover:text-[#3F72AF] focus:bg-gray-400 focus:outline-none">
             Details
-          </button>
+          </Link>
         </div>
       </div>
     </>

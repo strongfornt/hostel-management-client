@@ -15,6 +15,9 @@ import AllMeals from "../Dashboard/AdminDashboard/AllMeals/AllMeals";
 import Meals from "../pages/Meals/Meals";
 import UpcomingMeals from "../Dashboard/AdminDashboard/UpcomingMeals/UpcomingMeals";
 import UpcomingPublicMeals from "../pages/UpcomingPublicMeals/UpcomingPublicMeals";
+import MealsDetails from "../Components/MealsDetails/MealsDetails";
+import AdminPrivateRoute from "./Private/AdminPrivateRoute";
+import Profile from "../Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
     {
@@ -42,36 +45,43 @@ export const router = createBrowserRouter([
         {
           path: '/upcomingPublicMeals',
           element:<UpcomingPublicMeals/>
+        },
+        {
+          path:'/mealsDetails/:id',
+          element:<MealsDetails/>
         }
       ]
     },
     //dashboard start here====
     {
         path:'/dashboard',
-        element:<DashboardLayout/>,
+        element:<UserPrivateRoute><DashboardLayout/></UserPrivateRoute>,
         children:[
            //admin dashboard start ================================================4
            {
             index:true,
-            element:<AdminProfile/>
+            element:<UserPrivateRoute><Profile/></UserPrivateRoute>
            },
            {
             path:'manageUsers',
-            element:<ManageUsers/>
+            element:<AdminPrivateRoute><ManageUsers/></AdminPrivateRoute>
            },
            {
             path:'addMeal',
-            element:<AddMeal/>
+            element:<AdminPrivateRoute><AddMeal/></AdminPrivateRoute>
            },
            {
             path:'allMeals',
-            element:<AllMeals/>
+            element:<AdminPrivateRoute><AllMeals/></AdminPrivateRoute>
            },
            {
             path:'upcomingMeals',
-            element:<UpcomingMeals/>
-           }
+            element:<AdminPrivateRoute><UpcomingMeals/></AdminPrivateRoute>
+           },
            //admin dashboard end ================================================
+           //user dashboard start ==========================================
+
+           //user dashboard end ==========================================
         ]
     }
   ]);
