@@ -8,6 +8,7 @@ import MealsCard from "./MealsCard";
 import Spinner from "../../shared/Spinner/Spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {  useState } from "react";
+import NotFound from "../../shared/NotFound/NotFound";
 export default function Meals() {
  
   const { theme } = useAuth();
@@ -219,11 +220,11 @@ export default function Meals() {
         {isLoading ? (
           <Spinner />
         ) : (
-          <section className="mb-10 mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 px-2 md:px-4">
-            {mealsData?.map((meal, idx) => (
-              <MealsCard key={idx} meal={meal} />
-            ))}
-          </section>
+          mealsData?.length === 0? <NotFound/> :   <section className="mb-10 mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 px-2 md:px-4">
+          {mealsData?.map((meal, idx) => (
+            <MealsCard key={idx} meal={meal} />
+          ))}
+        </section>
         )}
       </InfiniteScroll>
     </>

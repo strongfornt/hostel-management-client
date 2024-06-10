@@ -10,8 +10,18 @@ import { useRef } from "react";
 
 import { BsChatQuote } from "react-icons/bs";
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 
 export default function Slider() {
+  const axiosPublic = useAxiosPublic()
+  const {data:review =[]} = useQuery({
+    queryKey:['public-review'],
+    queryFn: async() =>{
+        const {data} = await axiosPublic.get('/all_review')
+        return data;
+    }
+  })
   const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 4", "Slide 5"];
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -46,7 +56,7 @@ export default function Slider() {
         modules={[EffectCoverflow, Autoplay, Navigation]}
         className="mySwiper"
       >
-        {slides.map((slide, index) => (
+        {review.map((review, index) => (
           <SwiperSlide
             key={index}
             className="swiper-slide flex justify-center items-center"
@@ -55,7 +65,7 @@ export default function Slider() {
               <div className="flex py-2 flex-col items-center justify-center gap-2 h-1/2">
                 <BsChatQuote className=" text-2xl md:text-5xl text-[#3F72AF]" />
                 <p className=" text-xs  md:text-sm   text-[#4b5664] text-center">
-                 Lorem ipsum dolor sit amet consectetur  doloremque ratione?
+                {review?.reviewText}
                 </p>
               </div>
 
@@ -63,13 +73,13 @@ export default function Slider() {
               <div className=" flex py-5 md:py-0 flex-col gap-2 items-center justify-center h-1/2 bg-[#3F72AF]">
                 {/* user name======================= */}
 
-                <h1 className="text-white font-bold">Ahsan Ullah</h1>
+                <h1 className="text-white font-bold">{review?.reviewer?.name}</h1>
 
                 {/* user name======================= */}
                 {/* avatar ========================= */}
                 <div className="avatar">
                   <div className="w-14  rounded-full ring-1 ring-white ring-offset-base-100 ring-offset-2 ">
-                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    <img src={review?.reviewer?.image} />
                   </div>
                 </div>
                 {/* avatar ========================= */}

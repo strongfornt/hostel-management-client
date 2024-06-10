@@ -7,7 +7,7 @@ import axios from "axios";
 import UserPrivateRoute from "./Private/UserPrivateRoute";
 import Error from "../shared/Error/Error";
 
-import AdminProfile from "../Dashboard/AdminDashboard/AdminProfile/AdminProfile";
+
 import ManageUsers from "../Dashboard/AdminDashboard/ManageUser/ManageUsers";
 import DashboardLayout from "../RootLayout/DashboardLayout";
 import AddMeal from "../Dashboard/AdminDashboard/AddMeal/AddMeal";
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         {
             path:'/payment/:name',
             element:<UserPrivateRoute><Payment/></UserPrivateRoute>,
-            loader:({params}) => axios.get(`http://localhost:5000/membership/${params.name}`)
+            loader:({params}) => axios.get(`https://hostel-management-server-gamma.vercel.app/membership/${params.name}`)
         },
         {
           path:'/meals',
