@@ -6,35 +6,32 @@ import useAuth from "../../../hooks/useAuth";
 import RequestMealsTable from "./RequestMealsTable";
 import Spinner from "../../../shared/Spinner/Spinner";
 
-
 export default function RequestMeal() {
-    const {user} = useAuth()
-    const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-    const {data: requestMealsData = [], isLoading} = useQuery({
-        queryKey:['request_meals'],
-        queryFn: async () => {
-                const {data} = await axiosSecure.get(`/request_meals/${user?.email}`)
-                return data;
-        }
-    })
-
-  
+  const { data: requestMealsData = [], isLoading } = useQuery({
+    queryKey: ["request_meals"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/request_meals/${user?.email}`);
+      return data;
+    },
+  });
 
   return (
- <>
-    <Helmet>
-        <title>DineEase | AllMeals</title>
+    <>
+      <Helmet>
+        <title>DineEase | RequestMeals</title>
       </Helmet>
 
-
-    <section className=" my-7 md:my-10  md:ml-[15rem] lg:ml-1  xl:ml-44 " >
-    <div>
+      <section className=" my-7 md:my-10  md:ml-[15rem] lg:ml-1  xl:ml-44 ">
+        <div>
           <h1 className=" text-center text-2xl md:text-3xl font-bold text-[#4b5664] mb-2">
-          Requested  <span className="text-[#3F72AF]">Meals</span>
+            Requested <span className="text-[#3F72AF]">Meals</span>
           </h1>
           <p className="text-sm text-center mb-8 max-w-screen-sm mx-auto text-[#4b5664] ">
-          Manage your meal requests, view titles, likes, reviews, status, and cancel requests easily.
+            Manage your meal requests, view titles, likes, reviews, status, and
+            cancel requests easily.
           </p>
         </div>
 
@@ -62,16 +59,18 @@ export default function RequestMeal() {
                 </tr>
               </thead>
               <tbody>
-                {
-                   isLoading ? <Spinner/> :  requestMealsData?.map((meal,idx)=> <RequestMealsTable key={idx} meal={meal} /> )
-                }
+                {isLoading ? (
+                  <Spinner />
+                ) : (
+                  requestMealsData?.map((meal, idx) => (
+                    <RequestMealsTable key={idx} meal={meal} />
+                  ))
+                )}
               </tbody>
             </table>
           </div>
         </div>
-
-    </section>
-
- </>
-  )
+      </section>
+    </>
+  );
 }

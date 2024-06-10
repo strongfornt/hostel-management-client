@@ -93,6 +93,7 @@ export default function CheckoutForm({ totalPrice, badgeName }) {
           name: user?.displayName,
           email: user?.email,
           price: totalPrice,
+          badge:badgeName,
           date: new Date().toLocaleDateString("en-US", options),
           transactionId: paymentIntent.id
 

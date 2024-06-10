@@ -112,19 +112,19 @@ export default function ResponsiveDashboard({setIsOpen}) {
 				</a>
 			</li>
 			<li>
-				<Link to='/dashboard/requestedMeals'  className="flex items-center p-2 space-x-3 rounded-md">
+				<Link to='/dashboard/requestedMeals' onClick={()=> setIsOpen(false)} className="flex items-center p-2 space-x-3 rounded-md">
                     <IoIosGitPullRequest className="w-5 h-5 fill-current dark:text-gray-600" />
 					<span>Requested Meals</span>
 				</Link>
 			</li>
 			<li>
-				<Link to='/dashboard/myReviews'  className="flex items-center p-2 space-x-3 rounded-md">
+				<Link to='/dashboard/myReviews' onClick={()=> setIsOpen(false)}  className="flex items-center p-2 space-x-3 rounded-md">
                     <MdOutlineRateReview  className="w-5 h-5 fill-current dark:text-gray-600" />
 					<span>My Reviews</span>
 				</Link>
 			</li>
 			<li>
-				<Link to='/dashboard/paymentHistory'  className="flex items-center p-2 space-x-3 rounded-md">
+				<Link to='/dashboard/paymentHistory' onClick={()=> setIsOpen(false)} className="flex items-center p-2 space-x-3 rounded-md">
                     <MdPayment className="w-5 h-5 fill-current dark:text-gray-600" />
 					<span>Payment History</span>
 				</Link>
@@ -144,13 +144,13 @@ export default function ResponsiveDashboard({setIsOpen}) {
 				</p>
 			</li>
             <li>
-				<Link to='/'  className="flex items-center p-2 space-x-3 rounded-md">
+				<Link to='/' onClick={()=> setIsOpen(false)} className="flex items-center p-2 space-x-3 rounded-md">
                     <IoHomeOutline className="w-5 h-5 fill-current dark:text-gray-600" />
 					<span>Home</span>
 				</Link>
 			</li>
             <li>
-				<Link to='/meals'  className="flex items-center p-2 space-x-3 rounded-md">
+				<Link to='/meals' onClick={()=> setIsOpen(false)}  className="flex items-center p-2 space-x-3 rounded-md">
                     <PiBowlFood className="w-5 h-5 fill-current dark:text-gray-600" />
 					<span>Meals</span>
 				</Link>

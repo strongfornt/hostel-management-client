@@ -19,6 +19,7 @@ import MealsDetails from "../Components/MealsDetails/MealsDetails";
 import AdminPrivateRoute from "./Private/AdminPrivateRoute";
 import Profile from "../Dashboard/Profile/Profile";
 import RequestMeal from "../Dashboard/UserDashboard/RequestedMeal/RequestMeal";
+import PaymentHistory from "../Dashboard/UserDashboard/PaymentHistory/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
            {
             path:'requestedMeals',
             element:<UserPrivateRoute><RequestMeal/></UserPrivateRoute>
+           },
+           {
+            path:'paymentHistory',
+            element:<UserPrivateRoute><PaymentHistory/></UserPrivateRoute>
            }
            //user dashboard end ==========================================
         ]
