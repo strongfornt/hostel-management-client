@@ -21,6 +21,8 @@ import Profile from "../Dashboard/Profile/Profile";
 import RequestMeal from "../Dashboard/UserDashboard/RequestedMeal/RequestMeal";
 import PaymentHistory from "../Dashboard/UserDashboard/PaymentHistory/PaymentHistory";
 import ServeMeals from "../Dashboard/AdminDashboard/ServeMeals/ServeMeals";
+import MyReviews from "../Dashboard/UserDashboard/MyReviews/MyReviews";
+import AllReviews from "../Dashboard/AdminDashboard/AllReviews/AllReviews";
 
 export const router = createBrowserRouter([
     {
@@ -85,6 +87,10 @@ export const router = createBrowserRouter([
             path:'serveMeals',
             element:<AdminPrivateRoute><ServeMeals/></AdminPrivateRoute>
            },
+           {
+            path:'allReviews',
+            element:<AdminPrivateRoute><AllReviews/></AdminPrivateRoute>
+           },
            //admin dashboard end ================================================
            //user dashboard start ==========================================
            {
@@ -94,6 +100,10 @@ export const router = createBrowserRouter([
            {
             path:'paymentHistory',
             element:<UserPrivateRoute><PaymentHistory/></UserPrivateRoute>
+           },
+           {
+            path:'myReviews',
+            element:<UserPrivateRoute><MyReviews/></UserPrivateRoute>
            }
            //user dashboard end ==========================================
         ]
