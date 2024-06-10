@@ -4,6 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../../shared/Spinner/Spinner";
+import NotFound from "../../../shared/NotFound/NotFound";
 
 export default function PaymentHistory() {
     const {user} = useAuth();
@@ -34,37 +35,39 @@ export default function PaymentHistory() {
           </p>
         </div>
 
-        <div className="container  mx-auto  text-gray-100 dark:text-gray-800">
-          <h2 className="mb-4 text-2xl  font-semibold leading-tight"></h2>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-xs">
-              <colgroup>
-                <col />
-                <col />
-                <col />
-                <col />
-                <col />
-                <col className="w-24" />
-              </colgroup>
-              <thead className="bg-gray-700 dark:bg-gray-300">
-                <tr className="text-left">
-                  <th className="p-3">Date</th>
-                  <th className="p-3"></th>
-                  <th className="p-3">TransactionId</th>
-                  <th className="p-3"></th>
-                  <th className="p-3 ">Badge</th>
-
-                  <th className="p-3">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-               {
-                isLoading  ? <Spinner/> :  paymentData?.length === 0? <>  <p className="font-medium mt-6  " >You have no payment history yet. Once you make a payment, the details will appear here.</p> </>: paymentData?.map((payment,idx)=>  <PaymentHistoryTable key={idx} payment={payment} />)
-               }
-              </tbody>
-            </table>
+        {
+            isLoading ?  <Spinner/> : paymentData?.length === 0? <> <NotFound/> </> :  <div className="container  mx-auto  text-gray-100 dark:text-gray-800">
+            <h2 className="mb-4 text-2xl  font-semibold leading-tight"></h2>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-xs">
+                <colgroup>
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                  <col />
+                  <col className="w-24" />
+                </colgroup>
+                <thead className="bg-gray-700 dark:bg-gray-300">
+                  <tr className="text-left">
+                    <th className="p-3">Date</th>
+                    <th className="p-3"></th>
+                    <th className="p-3">TransactionId</th>
+                    <th className="p-3"></th>
+                    <th className="p-3 ">Badge</th>
+  
+                    <th className="p-3">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {
+                     paymentData?.map((payment,idx)=>  <PaymentHistoryTable key={idx} payment={payment} />)
+                 }
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        }
 
       </section>
   </>

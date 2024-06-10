@@ -14,7 +14,7 @@ export default function AdminPrivateRoute({children}) {
     return <Spinner />;
   }
 
-  if (user && userInfo?.role ==='Admin') return children;
+  if ( userInfo?.role ==='Admin' && user) return children;
 
-  return <Navigate to="/joinUs" state={location.pathname} replace={true} />;
+  return <Navigate to="/" state={location.pathname} replace={true} />;
 }

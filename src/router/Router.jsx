@@ -20,6 +20,7 @@ import AdminPrivateRoute from "./Private/AdminPrivateRoute";
 import Profile from "../Dashboard/Profile/Profile";
 import RequestMeal from "../Dashboard/UserDashboard/RequestedMeal/RequestMeal";
 import PaymentHistory from "../Dashboard/UserDashboard/PaymentHistory/PaymentHistory";
+import ServeMeals from "../Dashboard/AdminDashboard/ServeMeals/ServeMeals";
 
 export const router = createBrowserRouter([
     {
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
            {
             path:'upcomingMeals',
             element:<AdminPrivateRoute><UpcomingMeals/></AdminPrivateRoute>
+           },
+           {
+            path:'serveMeals',
+            element:<AdminPrivateRoute><ServeMeals/></AdminPrivateRoute>
            },
            //admin dashboard end ================================================
            //user dashboard start ==========================================
