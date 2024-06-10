@@ -18,6 +18,7 @@ import UpcomingPublicMeals from "../pages/UpcomingPublicMeals/UpcomingPublicMeal
 import MealsDetails from "../Components/MealsDetails/MealsDetails";
 import AdminPrivateRoute from "./Private/AdminPrivateRoute";
 import Profile from "../Dashboard/Profile/Profile";
+import RequestMeal from "../Dashboard/UserDashboard/RequestedMeal/RequestMeal";
 
 export const router = createBrowserRouter([
     {
@@ -80,7 +81,10 @@ export const router = createBrowserRouter([
            },
            //admin dashboard end ================================================
            //user dashboard start ==========================================
-
+           {
+            path:'requestedMeals',
+            element:<UserPrivateRoute><RequestMeal/></UserPrivateRoute>
+           }
            //user dashboard end ==========================================
         ]
     }

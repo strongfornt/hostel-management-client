@@ -12,18 +12,28 @@ import moment from "moment";
 import Spinner from "../../shared/Spinner/Spinner";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiSolidLike } from "react-icons/bi";
-import { useState } from "react";
+import useLikeStatus from "../../hooks/useLikeStatus";
+import useUserInfo from "../../hooks/useUserInfo";
+import { useForm } from "react-hook-form";
 // import useUserInfo from "../../hooks/useUserInfo";
 
 export default function MealsDetails() {
-  const { theme} = useAuth();
-  const { id } = useParams();
-  // const {userInfo} = useUserInfo();
-  const [like, setLike] = useState(false);
- 
+  const { theme, user } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const { userInfo } = useUserInfo();
+  const { id } = useParams();
+  const { likeStatus, likeRefetch } = useLikeStatus(id);
+
+  const isLiked = (mealId) => {
+    return likeStatus[mealId] === true;
+  };
+
   // use query from tanstack for fetch data =======
-  const { data: mealDetails = {}, isLoading } = useQuery({
+  const {
+    data: mealDetails = {},
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["meal-details"],
     queryFn: async () => {
       const { data } = await axiosPublic.get(`/meal-details/${id}`);
@@ -31,8 +41,149 @@ export default function MealsDetails() {
     },
   });
 
+  // handle like topic ========================================================
+  const handleLike = async () => {
+    if (!user) {
+      toast.error("Please log in to interact with our upcoming meals!");
+      return;
+    }
+    if (userInfo?.role === "User" && userInfo?.badge === "Bronze") {
+      toast.error(
+        "Upgrade to a premium subscription to like our upcoming meals!"
+      );
+      return;
+    }
+    //action for upcoming meals start ================================
+    if (mealDetails?.status === "Upcoming") {
+      const likesInfo = {
+        email: user?.email,
+        upcomingId: mealDetails?.upcomingId,
+        status: mealDetails?.status,
+      };
+      const { data } = await axiosPublic.post(
+        `/likes/${mealDetails?._id}`,
+        likesInfo
+      );
+      if (data && data.totalLikes >= 10) {
+        likeRefetch();
+        refetch();
+      } else if (data) {
+        likeRefetch();
+      }
+      return;
+    }
+    //action for upcoming meals end ================================
+
+    //action for the available status=======================
+    const likesInfo = {
+      email: user?.email,
+    };
+    const { data } = await axiosPublic.post(
+      `/likes_available_meals/${mealDetails?._id}`,
+      likesInfo
+    );
+
+    if (data) {
+      likeRefetch();
+    }
+    //action for the available status end ======================
+  };
+  // handle like topic end ========================================================
+  // handle meals request =======================================================
+  const handleMealRequest = async () => {
+    if (!user) {
+      toast.error("Oops! You need to be logged in to request a meal!");
+      return;
+    }
+    if (userInfo?.role === "User" && userInfo?.badge === "Bronze") {
+      toast.error(
+        "Subscription Required!Upgrade your plan to enjoy this feature."
+      );
+      return;
+    }
+    if (userInfo?.role === "Admin") {
+      toast.error("Request Denied! Admins cannot request their own meals!");
+      return;
+    }
+    if (mealDetails?.status === "Upcoming") {
+      toast.error(
+        "Request Unavailable! You cannot request meals that are marked as upcoming."
+      );
+      return;
+    }
+
+    //validation  end==========================================
+    // request for meal start =============================================
+    const requestMealInfo = {
+      mealId: mealDetails?._id,
+      title: mealDetails?.title,
+      likes: mealDetails?.likes,
+      reviews: mealDetails?.reviews,
+      status: "Pending",
+      requester: {
+        email: user?.email || "Anonymous",
+        name: user?.displayName || "Anonymous",
+      },
+    };
+
+    // console.log(requestMealInfo);
+    const { data } = await axiosPublic.post("/request_meals", requestMealInfo);
+    
+    if (data.insertedId) {
+      toast.success(
+        "Request Submitted! Your meal request is pending approval. Thank you!"
+      );
+    }
+  };
+  // handle meals request end =======================================================
+
+  //handle review start here =========================================
+  const { register, 
+    handleSubmit,
+     reset,
+     formState:{errors} } = useForm();
+  const formSubmit = async (data) => {
+    if (!user) {
+      toast.error("You must be logged in to submit a review!");
+      return;
+    }
+    if (userInfo?.role === "Admin") {
+      toast.error("Admins cannot submit reviews for their own meals!");
+      return;
+    }
+    if(mealDetails?.status === 'Upcoming'){
+      toast.error('You cannot submit a review for an upcoming meal!')
+      return
+    }
+    
+    const reviewsData = {
+      mealId: mealDetails?._id,
+      title: mealDetails?.title,
+      likes: mealDetails?.likes,
+      reviews: mealDetails?.reviews,
+      reviewText: data?.reviews,
+      reviewer: {
+          email: user?.email || 'Anonymous',
+          name:  user?.displayName || 'Anonymous',
+          image: user?.photoURL
+      }
+    }
+  
+
+    //post reviews data in collection ==========================
+    const res = await axiosPublic.post(`/reviews/${mealDetails?._id}`,reviewsData)
+      if(res?.data?.insertedId){
+        toast.success('Thanks for sharing your review!')
+        reset()
+      }
+  
+
+  };
+  //handle review start end here =========================================
+  //others topic---------------------------------------------------
+
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   const {
@@ -43,12 +194,11 @@ export default function MealsDetails() {
     description,
     status,
     rating,
-    
+    ingredientsItems,
     currentTime,
     creator,
   } = mealDetails || {};
 
-  
   return (
     <>
       <Helmet>
@@ -116,12 +266,12 @@ export default function MealsDetails() {
                   {title}
                 </h1>
                 <div>
-                  {like ? (
-                    <button onClick={() => setLike(false)}>
+                  {isLiked(id) ? (
+                    <button onClick={handleLike}>
                       <BiSolidLike className="text-[#3F72AF] text-lg" />
                     </button>
                   ) : (
-                    <button onClick={() => setLike(true)} className="text-lg">
+                    <button onClick={handleLike} className="text-lg">
                       <AiOutlineLike />
                     </button>
                   )}
@@ -174,7 +324,7 @@ export default function MealsDetails() {
                 data-aos="zoom-in-right"
                 data-aos-delay="2200 "
                 data-aos-duration="2200"
-                className="mt-1 mb-3 text-base text-[#968f8f] sm:mb-3  "
+                className="mt-1 mb-1 text-base text-[#968f8f]   "
               >
                 <span
                   className={` font-semibold ${
@@ -185,13 +335,74 @@ export default function MealsDetails() {
                 </span>{" "}
                 - {description}
               </p>
-              <div className="mt-3">
-                <button className="px-4 py-2 bg-[#3F72AF] text-white rounded-md hover:bg-[#477dc1] duration-300 font-medium">
-                  Request Meal
-                </button>
 
-                {/* modal end================================= */}
+              {/* ingredientsItems start======================= */}
+              <div className=" flex justify-between    ">
+                <ul className=" mb-3 text-xs text-[#968f8f] sm:mb-3 list-disc ">
+                  <span
+                    className={` font-semibold text-base ${
+                      theme === "light" ? "text-[#383737] " : "text-white"
+                    }`}
+                  >
+                    Ingredients
+                  </span>{" "}
+                  -{" "}
+                  {ingredientsItems?.map((item, idx) => (
+                    <li key={idx} className="ml-7">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-3">
+                  <button
+                    onClick={handleMealRequest}
+                    className="px-2 py-1 bg-[#3F72AF] text-white rounded-md hover:bg-[#477dc1] duration-300 font-medium"
+                  >
+                    Request Meal
+                  </button>
+
+                  {/* modal end================================= */}
+                </div>
               </div>
+
+              {/* review section start ====================== */}
+              <form onSubmit={handleSubmit(formSubmit)}>
+                {/* <h1 className="text-[#383737] font-semibold text-base " > Share Your Experience:</h1> */}
+                <label
+                  htmlFor="reviews"
+                  className="block text-sm text-[#383737] font-semibold "
+                >
+                  Share Your Experience:{" "}
+                  <span className="text-xs text-[#4b5664] ml-3">50/100</span>
+                </label>
+                <textarea
+                  required
+                  {...register("reviews", {
+                    minLength: {
+                      value: 50,
+                      message: "Review must be at least 50 characters long.",
+                    },
+                    maxLength: {
+                      value: 150,
+                      message: "Review must not exceed 150 characters.",
+                    },
+                  })}
+                  type="text"
+                  name="reviews"
+                  id="reviews"
+                  placeholder="write your opinion here .."
+                  className="w-full px-3 py-2 border outline-none rounded-md bg-transparent border-gray-300 focus:ring-1 focus:ring-[#3F72AF]"
+                />
+                        {errors.reviews && <p style={{ color: 'red' }}>{errors.reviews.message}</p>}
+
+                <button
+                  type="submit"
+                  className="px-2 py-1 bg-[#425b79] text-white rounded-md hover:bg-[#477dc1] duration-300 font-medium"
+                >
+                  Submit
+                </button>
+              </form>
+              {/* review section start ====================== */}
             </div>
             <div className="flex  relative items-center lg:px-6 xl:px-0   justify-center rounded-xl  mb-5  lg:mt-0 h-80 sm:h-80 lg:h-80 xl:h-112 2xl:h-128">
               <div className="absolute bg-gray-900/75 text-white text-lg font-semibold px-3 py-2 rounded-md ">

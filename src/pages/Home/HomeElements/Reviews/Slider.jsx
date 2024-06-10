@@ -55,7 +55,7 @@ export default function Slider() {
               <div className="flex py-2 flex-col items-center justify-center gap-2 h-1/2">
                 <BsChatQuote className=" text-2xl md:text-5xl text-[#3F72AF]" />
                 <p className=" text-xs  md:text-sm   text-[#4b5664] text-center">
-                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad facilis error consequatur adipisci qui earum illum dolorum ab doloremque ratione?
+                 Lorem ipsum dolor sit amet consectetur  doloremque ratione?
                 </p>
               </div>
 

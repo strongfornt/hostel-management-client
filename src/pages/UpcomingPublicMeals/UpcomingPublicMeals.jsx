@@ -6,12 +6,13 @@ import UpPublicMealsCard from "./UpPublicMealsCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Spinner from "../../shared/Spinner/Spinner";
+import useLikeStatus from "../../hooks/useLikeStatus";
 
 export default function UpcomingPublicMeals() {
   const { theme } = useAuth();
   const axiosPublic = useAxiosPublic()
   //use tanstack query for fetch data ============================
-    const{data: mealsData = [], isLoading } = useQuery({
+    const{data: mealsData = [], isLoading , refetch } = useQuery({
         queryKey:['upcoming_public_meals'],
         queryFn: async()=> {
                 const {data} = await axiosPublic.get('/upcoming_public_meals');
@@ -19,10 +20,13 @@ export default function UpcomingPublicMeals() {
         }
     })
   //use tanstack query for fetch data end ============================
-  if(isLoading){
-    return <Spinner/>
-  }
-  
+
+  const allMealsIds = mealsData?.map(ids => ids._id)
+ 
+  // const {email} = user?.email || 'anonymous'
+ const {likeStatus, likeRefetch} = useLikeStatus(allMealsIds);
+
+
   return (
     <>
       <Helmet>
@@ -77,11 +81,11 @@ export default function UpcomingPublicMeals() {
         </p>
       </section>
       {/* card start here======================= */}
-            <section className="mb-10 mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 px-2 md:px-4" >
+           {isLoading ? <Spinner/> :  <section className="mb-10 mt-5 grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 px-2 md:px-4" >
                 {
-                    mealsData?.map((meal,idx) => <UpPublicMealsCard key={idx} meal={meal} /> )
+                    mealsData?.map((meal,idx) => <UpPublicMealsCard key={idx} meal={meal} refetch={refetch} likeStatus={likeStatus} likeRefetch={likeRefetch} /> )
                 }
-            </section>
+            </section>}
     </>
   );
 }

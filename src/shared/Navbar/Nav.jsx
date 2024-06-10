@@ -8,7 +8,7 @@ import { calculateScrollbarWidth } from "./ScrollBar";
 import OutsideClickHandler from "react-outside-click-handler";
 import { SiReactrouter } from "react-icons/si";
 
-import { IoMdArrowDropup } from "react-icons/io";
+import { IoIosNotifications, IoMdArrowDropup } from "react-icons/io";
 import { MdBrowserUpdated, MdLogout } from "react-icons/md";
 
 import useAuth from "../../hooks/useAuth";
@@ -175,6 +175,17 @@ export default function Nav() {
           <p className="">Join-Us</p>
         </NavLink>
       )}
+      <h1
+        className={` ${
+          location.pathname === "/" && scrollY < 199
+            ? "text-white"
+            : "text-[#4b5664]"
+        } font-medium hover:text-[#3F72AF] duration-300 cursor-progress text-lg `}
+      >
+        <p className="">
+          <IoIosNotifications />
+        </p>
+      </h1>
     </>
   );
 
@@ -216,44 +227,15 @@ export default function Nav() {
           </div>
           {/* <div className="navbar-end hidden lg:flex"></div> */}
           <div className="navbar-end flex-1  ">
-            <label className="cursor-pointer  mr-4  md:hidden grid place-items-center">
-              <input
-                onChange={handleTheme}
-                type="checkbox"
-                value="halloween"
-                checked={theme === "light" ? false : true}
-                className="toggle theme-controller bg-base-content row-start-1 h-5  col-start-1 col-span-2"
-              />
-              <svg
-                className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="5" />
-                <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-              </svg>
-              <svg
-                className="col-start-2 row-start-1 stroke-base-100 fill-base-100"
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-              </svg>
-            </label>
+            <button
+              className={` ${
+                location.pathname === "/" && scrollY < 199
+                  ? "text-white"
+                  : "text-[#4b5664]"
+              } font-medium hover:text-[#3F72AF] mr-3 md:hidden  duration-300 cursor-progress text-base `}
+            >
+              <IoIosNotifications />
+            </button>
 
             {/* responsive menu start */}
             <OutsideClickHandler onOutsideClick={() => setMenu(false)}>
@@ -414,7 +396,6 @@ export default function Nav() {
                           Join-Us
                         </span>
                       </Link>
-                      
                     </>
                   )}
                 </li>

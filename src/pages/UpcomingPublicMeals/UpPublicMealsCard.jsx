@@ -1,10 +1,54 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiSolidLike } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import useUserInfo from "../../hooks/useUserInfo";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-export default function UpPublicMealsCard({ meal }) {
-  const [like, setLike] = useState(false);
+export default function UpPublicMealsCard({
+  meal,
+  refetch,
+  likeStatus,
+  likeRefetch,
+}) {
+  const axiosPublic = useAxiosPublic();
+  const { user } = useAuth();
+  const { userInfo } = useUserInfo();
+  const isLiked = (mealId) => {
+    return likeStatus[mealId] === true;
+  };
+  //handle like =============================
+  const handleLike = async () => {
+    if (!user) {
+      toast.error("Please log in to interact with our upcoming meals!");
+      return;
+    }
+    if (userInfo?.role === "User" && userInfo?.badge === "Bronze") {
+      toast.error(
+        "Upgrade to a premium subscription to like our upcoming meals!"
+      );
+      return;
+    }
+
+    const likesInfo = {
+      email: user?.email,
+      upcomingId: meal?.upcomingId,
+    };
+    const { data } = await axiosPublic.post(`/likes/${meal?._id}`, likesInfo);
+
+    if (data && data.totalLikes >= 10) {
+      likeRefetch();
+      refetch();
+    } else if (data) {
+      // setLike(data.message)
+      likeRefetch();
+    }
+  };
+
+  //handle like end =============================
+
   return (
     <>
       <div className=" overflow-hidden  rounded-lg shadow-lg bg-[#F9F7F7]">
@@ -38,18 +82,31 @@ export default function UpPublicMealsCard({ meal }) {
         </div>
 
         <div className="flex items-center justify-between px-1  mb-2 bg-[#F9F7F7]">
-          {like ? (
-            <button onClick={() => setLike(false)}>
+          {isLiked(meal?._id) ? (
+            <button
+              onClick={() => {
+                handleLike();
+                // setLike(true)
+              }}
+            >
               <BiSolidLike className="text-[#3F72AF]" />
             </button>
           ) : (
-            <button onClick={() => setLike(true)}>
+            <button
+              onClick={() => {
+                handleLike();
+                // setLike(false)
+              }}
+            >
               <AiOutlineLike />
             </button>
           )}
-          <button className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-[#3F72AF] rounded hover:bg-gray-200 hover:text-[#3F72AF] focus:bg-gray-400 focus:outline-none">
+          <Link
+            to={`/mealsDetails/${meal?._id}`}
+            className="px-2 py-1 text-xs font-semibold text-white uppercase transition-colors duration-300 transform bg-[#3F72AF] rounded hover:bg-gray-200 hover:text-[#3F72AF] focus:bg-gray-400 focus:outline-none"
+          >
             Details
-          </button>
+          </Link>
         </div>
       </div>
     </>
