@@ -30,7 +30,7 @@ export default function ResponsiveDashboard({setIsOpen}) {
 		const {role} = userInfo || {}
   return (
     <>
-        <div className={`${role === 'Admin'? 'max-h-screen': 'min-h-screen'} p-3 space-y-2 w-60 dark:bg-[#DBE2EF] overflow-y-auto dark:text-gray-800 `}>
+        <div className={` min-h-screen p-3 space-y-2 w-60 dark:bg-[#DBE2EF] !overflow-y-auto dark:text-gray-800 `}>
             {/* <div className=" absolute  top-0 left-0  md:hidden" >
           
             <RiCloseCircleLine onClick={()=>setIsOpen(false)} className="w-6 h-6 cursor-pointer text-[#4b5664] " />

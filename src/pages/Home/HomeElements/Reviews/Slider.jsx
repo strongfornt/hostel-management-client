@@ -22,7 +22,6 @@ export default function Slider() {
         return data;
     }
   })
-  const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 4", "Slide 5"];
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   return (
@@ -56,7 +55,7 @@ export default function Slider() {
         modules={[EffectCoverflow, Autoplay, Navigation]}
         className="mySwiper"
       >
-        {review.map((review, index) => (
+        {review?.map((review, index) => (
           <SwiperSlide
             key={index}
             className="swiper-slide flex justify-center items-center"

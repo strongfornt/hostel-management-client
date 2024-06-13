@@ -33,12 +33,12 @@ export default function Home() {
       
 
           {/* review section  ============================== */}
-          <div className="my-32 overflow-hidden" >
+          <div className=" my-16 overflow-hidden" >
             <Review/>
         </div>
         {/* review section  ============================== */}
 
-        <div className="mb-16 mt-44" >
+        <div className="my-16" >
             <Partnership/>
         </div>
         <div className="mt-10  ">

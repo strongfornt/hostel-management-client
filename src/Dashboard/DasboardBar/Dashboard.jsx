@@ -40,7 +40,7 @@ export default function Dashboard() {
   
   return (
     <>
-      <div className={`${role === 'Admin'? 'max-h-screen': 'min-h-screen'} p-3 space-y-2 w-60 dark:bg-[#DBE2EF] overflow-y-auto dark:text-gray-800 `}>
+      <div className={`min-h-screen p-3 space-y-2 w-60 dark:bg-[#DBE2EF] !overflow-y-auto dark:text-gray-800 `}>
         <div className="flex items-center p-2 space-x-4">
           <img
             src={user?.photoURL}
