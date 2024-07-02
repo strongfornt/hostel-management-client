@@ -38,7 +38,7 @@ https://github.com/strongfornt/DineEase-Server
 2- Set up Firebase for authentication and paste your own credential in firebase.config file.
 
 3- Clone the server site repo repository:
- - git clone https://github.com/strongfornt/TipTrove-server
+ - git clone https://github.com/strongfornt/DineEase-Server
  - set up dependencies : npm i
  - Set up MongoDB
  - Set up MongoDB Atlas or run a local instance.
