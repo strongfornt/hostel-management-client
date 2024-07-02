@@ -1,41 +1,48 @@
 
+
 ## DineEase
-DineEase is a comprehensive platform that allows users to browse, like, and request meals. Admins can manage upcoming and available meals, track user requests, and handle reviews. With secure user authentication, detailed payment history, and responsive design, it offers a seamless experience for both users and administrators.
+DineEase is a versatile platform for browsing, liking, and requesting meals. It offers comprehensive admin tools for managing meals, tracking requests, and handling reviews. With secure authentication, detailed payment records, and responsive design, DineEase ensures a seamless experience for users and administrators alike.
+
 ## Live site url
 https://hostel-management-30afb.web.app/
 
-or
+## Server site repo
 
-https://hostel-management-30afb.firebaseapp.com/
-## Admin Idp
+https://github.com/strongfornt/DineEase-Server
 
-email: admin@gmail.com
-pass: Adminn
-## Features
+## Admin idp
+- email: admin@gmail.com
+- pass: Adminn
 
-- User Authentication: Secure login and registration for users and admin.
+## Key Features
 
-- Upcoming Meals: Display upcoming meals, only premium users can like meals.
+ - Displays upcoming meals: only premium users can like meals.
+ - Admin Meal Management: Add, update meal statuses, and manage requests.
+ - Payment History: Displays payment history with relevant messages.
 
-- Available Meals: Browse available meals, with like functionality for all users.
+## Technologies Used
 
-- Meal Requests: Users can request meals, subject to subscription status.
-
-- Review System: Users can post reviews, view review counts, and manage their own reviews.
-
-- Admin Meal Management: Admins can add new meals, update meal statuses, and manage meal requests.
-
-- Meal Like System: Tracks likes on meals, ensuring users can like each meal only once.
-
-- Payment History: Displays payment history for logged-in users with relevant messages for no data.
-
-- Serve Meals: Admins can mark requested meals as delivered and track user requests.
-
-- Search Functionality: Server-side search by username and email for efficient data management.
-
-- Responsive Design: Optimized for both desktop and mobile devices for seamless user experience.
+- Frontend: React, Tailwind CSS
+- Backend: Express,JWT
+- Database: MongoDB
+- Authentication: Firebase
 
 
-## Server side repo
 
-https://github.com/programming-hero-web-course1/b9a12-server-side-strongfornt
+## Running the Project Locally
+
+1- Clone the cleint site repo repository:
+- git clone https://github.com/strongfornt/dineEase-Client
+- cd dine-ease
+- npm i
+2- Set up Firebase for authentication and paste your own credential in firebase.config file.
+
+3- Clone the server site repo repository:
+ - git clone https://github.com/strongfornt/TipTrove-server
+ - set up dependencies : npm i
+ - Set up MongoDB
+ - Set up MongoDB Atlas or run a local instance.
+ - Add your MongoDB connection URI located in index file
+
+- npm run dev in client site  then Open your browser and navigate to http://localhost: port
+- if you want run server as well then write this command in terminal  nodemon index.js , and paste the port in browser
